@@ -5,7 +5,7 @@
       <label class="block text-sm font-medium text-gray-700 mt-1">Crop</label>
 
       <Multiselect
-        v-model="crop"
+        v-model="calculatorValues.crop"
         :mode="'single'"
         :searchable="true"
         :options="crops"
@@ -20,7 +20,7 @@
         >Procote</label
       >
       <Multiselect
-        v-model="procote"
+        v-model="calculatorValues.procote"
         :mode="'single'"
         :searchable="true"
         :options="procotes"
@@ -32,12 +32,19 @@
         :object="true"
       />
 
-      <InputField label="Yield" name="yield" type="number" value="85" />
+      <InputField
+        label="Yield"
+        name="yieldValue"
+        type="number"
+        :value="calculatorValues.yieldValue"
+        :onChange="setAttrValue"
+      />
       <InputField
         label="Dry Fertilizer Rate"
-        name="dry-fertilizer-rate"
+        name="dfRate"
         type="number"
-        value="150"
+        :value="calculatorValues.dfRate"
+        :onChange="setAttrValue"
       />
     </div>
     <div class="relative">
@@ -53,34 +60,71 @@
 <script>
 import Multiselect from "@vueform/multiselect";
 import { InputField } from "@/components/Shared/index.js";
-import { cropList, procoteList } from "@/utils/services/index.js";
+import { cropList, procoteList, calculate } from "@/utils/services/index.js";
 export default {
   components: { Multiselect, InputField },
   data() {
     return {
       loading: false,
       procotes: [],
-      procote: null,
       crops: [],
-      crop: null,
+      calculatorValues: {
+        procote: null,
+        crop: null,
+        yieldValue: 0,
+        dfRate: 0,
+      },
+      result: {
+        details: {},
+        price: null,
+        quantity: 0,
+        removal: [],
+      },
     };
   },
   mounted() {
     this.getDropdownValues();
   },
   methods: {
+    setAttrValue(event) {
+      const { name, value } = event.target;
+      this.calculatorValues[name] = value;
+    },
     getDropdownValues() {
       this.loading = true;
       Promise.all([cropList(), procoteList()])
         .then(([crops, procotes]) => {
           this.crops = crops.data;
-          this.crop = crops.data[0];
+          this.calculatorValues.crop = crops.data[0];
           this.procotes = procotes.data;
-          this.procote = procotes.data[0];
+          this.calculatorValues.procote = procotes.data[0];
         })
         .finally(() => {
           this.loading = false;
         });
+    },
+    calculateResult(crop, procote, yieldValue, dfRate) {
+      this.loading = true;
+      calculate(crop.name, procote.name, yieldValue, dfRate)
+        .then((response) => {
+          const { details, price, quantity_per_tonne, removal } = response.data;
+          this.result.details = details;
+          this.result.price = price;
+          this.result.quantity = quantity_per_tonne;
+          this.result.removal = removal;
+        })
+        .finally(() => {
+          this.loading = false;
+        });
+    },
+  },
+  watch: {
+    calculatorValues: {
+      deep: true,
+      handler(formValues) {
+        const { crop, procote, yieldValue, dfRate } = formValues;
+        this.calculateResult(crop, procote, yieldValue, dfRate);
+      },
     },
   },
 };

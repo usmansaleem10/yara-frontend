@@ -24,6 +24,7 @@
         :value="value"
         :aria-invalid="error"
         :aria-describedby="describedBy"
+        @change="onChange"
       />
       <div
         v-if="error"
@@ -50,9 +51,10 @@ export default {
     label: { type: String, required: false },
     type: { type: String, default: "text" },
     name: { type: String, required: true },
-    value: { type: String, required: true },
+    value: { type: [String, Number], required: true },
     placeholder: { type: String, default: "" },
     errorText: { type: String, default: "" },
+    onChange: { type: Function, required: true },
     min: { type: String, default: "0" },
     max: { type: String, default: "1000" },
   },
