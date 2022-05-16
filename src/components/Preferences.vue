@@ -1,3 +1,3 @@
 <template>
-  <p>perefernces</p>
+  <p>Coming Soon...</p>
 </template>
