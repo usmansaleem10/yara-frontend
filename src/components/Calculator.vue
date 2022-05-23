@@ -2,7 +2,7 @@
 <template>
   <div class="overflow-hidden rounded-lg">
     <div class="px-4 py-5 sm:p-6">
-      <CalculatorForm v-if="selectedTab == 'Calculate'" />
+      <CalculatorPage v-if="selectedTab == 'Calculate'" />
       <Preferences v-else />
     </div>
     <div class="px-4 py-4 sm:px-6 footer">
@@ -40,9 +40,9 @@ const tabs = [
   { name: "My Preferances", current: false },
   { name: "Calculate", current: true },
 ];
-import { CalculatorForm, Preferences } from "@/components/index.js";
+import { CalculatorPage, Preferences } from "@/components/index.js";
 export default {
-  components: { CalculatorForm, Preferences },
+  components: { CalculatorPage, Preferences },
   data() {
     return {
       tabs: tabs,
