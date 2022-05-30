@@ -1,18 +1,29 @@
 <template>
-  <apexchart
-    type="bar"
-    height="250"
-    :options="chartOptions"
-    :series="series"
-  ></apexchart>
+  <apexchart type="bar" height="250" :options="options" :series="chartSeries" />
 </template>
 <script>
 export default {
   props: {
-    chartData: { type: Array, required: true },
+    chartData: { type: Object, required: true },
   },
-  computed: {
-    chartOptions() {
+  data() {
+    return {
+      options: {},
+      chartSeries: [],
+    };
+  },
+  watch: {
+    chartData: {
+      deep: true,
+      immediate: true,
+      handler(newVal) {
+        this.options = this.chartOptions(newVal);
+        this.chartSeries = this.series(newVal);
+      },
+    },
+  },
+  methods: {
+    chartOptions(data) {
       return {
         chart: {
           type: "bar",
@@ -39,8 +50,8 @@ export default {
           },
         },
         xaxis: {
-          categories: Object.keys(this.chartData).map((label) =>
-            label.replace("_ratio", "").toUpperCase()
+          categories: Object.keys(data).map((label) =>
+            this.procoteLabel(label.replace("_ratio", ""))
           ),
           labels: {
             style: {
@@ -50,13 +61,21 @@ export default {
         },
       };
     },
-    series() {
+    series(data) {
       return [
         {
-          name: Object.keys(this.chartData),
-          data: Object.values(this.chartData),
+          name: Object.keys(data),
+          data: Object.values(data),
         },
       ];
+    },
+    procoteLabel(procote) {
+      return {
+        b: "Boron",
+        mn: "Magnesium",
+        zn: "Zinc",
+        cu: "Copper",
+      }[procote];
     },
   },
 };

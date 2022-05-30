@@ -23,7 +23,7 @@
       placeholder="Please select Procote"
       :canClear="false"
       :value-prop="'id'"
-      :label="'name'"
+      :label="'label'"
       :track-by="'name'"
       :object="true"
     />
@@ -94,10 +94,23 @@ export default {
     if (!this.procotes.length || !this.crops.length) this.getDropdownValues();
   },
   methods: {
+    procoteLabel(procote) {
+      return {
+        B: "Boron",
+        Mn: "Magnesium",
+        Zn: "Zinc",
+        Cu: "Copper",
+        BMZ: "BMZ",
+        BCMZ: "BCMZ",
+      }[procote];
+    },
     getDropdownValues() {
       Promise.all([cropList(), procoteList()]).then(([crops, procotes]) => {
         this.crops = crops.data;
-        this.procotes = procotes.data;
+        this.procotes = procotes.data.map((procote) => {
+          procote.label = this.procoteLabel(procote.name);
+          return procote;
+        });
       });
     },
   },
