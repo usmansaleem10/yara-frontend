@@ -14,19 +14,6 @@
       :track-by="'name'"
       :object="true"
     />
-    <label class="block text-sm font-medium text-gray-700 mt-1">Procote</label>
-    <Multiselect
-      v-model="procote"
-      :mode="'single'"
-      :searchable="true"
-      :options="procotes"
-      placeholder="Please select Procote"
-      :canClear="false"
-      :value-prop="'id'"
-      :label="'label'"
-      :track-by="'name'"
-      :object="true"
-    />
 
     <InputField
       label="Yield"
@@ -41,6 +28,19 @@
       type="number"
       :value="formValues.dfRate"
       :onChange="setAttrValue"
+    />
+    <label class="block text-sm font-medium text-gray-700 mt-1">Procote</label>
+    <Multiselect
+      v-model="procote"
+      :mode="'single'"
+      :searchable="true"
+      :options="procotes"
+      placeholder="Please select Procote"
+      :canClear="false"
+      :value-prop="'id'"
+      :label="'label'"
+      :track-by="'name'"
+      :object="true"
     />
   </div>
 </template>

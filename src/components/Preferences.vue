@@ -82,23 +82,18 @@ export default {
       return {
         area: {
           heading: "Area of Measure",
-          subHeading: "This is a description text",
         },
         weight: {
           heading: "Micronutriats as applied",
-          subHeading: "This is a description text",
         },
         weightAppliedPerArea: {
           heading: "Dry Fertilizer as Applied/Area",
-          subHeading: "This is a description text",
         },
         weightAsBlended: {
           heading: "Dry Fertilizer as Blended",
-          subHeading: "This is a description text",
         },
         weightAppliedToBlended: {
           heading: "Procote Applied to blend",
-          subHeading: "This is a description text",
         },
       }[name];
     },

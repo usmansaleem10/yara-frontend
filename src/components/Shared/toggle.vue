@@ -2,7 +2,6 @@
   <div class="grid grid-flow-row auto-rows-max">
     <div>
       {{ details.heading }}
-      <p class="text-gray-500">{{ details.subHeading }}</p>
     </div>
     <div>
       <SwitchGroup as="div" class="flex items-center">

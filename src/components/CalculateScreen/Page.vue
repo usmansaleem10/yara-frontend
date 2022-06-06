@@ -8,7 +8,7 @@
       />
       <div v-if="result.price" class="flex">
         <InputField
-          label="Price"
+          :label="`Price ${result.price}`"
           name="price"
           type="range"
           :value="result.price"
