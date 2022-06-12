@@ -3,7 +3,7 @@
   <div class="overflow-hidden rounded-lg">
     <div class="px-4 py-5 sm:p-6">
       <CalculatorPage v-if="selectedTab == 'Calculate'" />
-      <Preferences v-else />
+      <Preferences v-else :pref="pref" :setValue="setValue" />
     </div>
     <div class="px-4 py-4 sm:px-6 footer">
       <nav
@@ -47,9 +47,20 @@ export default {
     return {
       tabs: tabs,
       selectedTab: "Calculate",
+
+      pref: {
+        area: "Hectres",
+        weight: "Grams",
+        weightAppliedPerArea: "Kg",
+        weightAsBlended: "Tonne",
+        weightAppliedToBlended: "Liters",
+      },
     };
   },
   methods: {
+    setValue(name, val) {
+      this.pref[name] = val;
+    },
     selectTab(name) {
       this.selectedTab = name;
       this.tabs.forEach((tab) => {

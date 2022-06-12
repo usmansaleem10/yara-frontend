@@ -3,6 +3,23 @@
   <div class="bg-white shadow overflow-hidden rounded-md mt-5">
     <ul role="list" class="divide-y divide-gray-200">
       <li class="px-6 py-4">
+        <label class="block text-sm font-medium text-gray-700 mt-1"
+          >Region</label
+        >
+        <Multiselect
+          v-model="region"
+          :mode="'single'"
+          :searchable="true"
+          :options="regions"
+          placeholder="Please select Region"
+          :canClear="false"
+          :value-prop="'id'"
+          :label="'state_name'"
+          :track-by="'state_name'"
+          :object="true"
+        />
+      </li>
+      <li class="px-6 py-4">
         <Toggle
           :details="details('area')"
           name="area"
@@ -52,23 +69,24 @@
 </template>
 <script>
 import { Toggle } from "@/components/Shared/index.js";
+import { regionList } from "@/utils/services/index.js";
+import Multiselect from "@vueform/multiselect";
 export default {
-  components: { Toggle },
+  components: { Toggle, Multiselect },
   data() {
     return {
-      pref: {
-        area: "Hectres",
-        weight: "Grams",
-        weightAppliedPerArea: "Kg",
-        weightAsBlended: "Tonne",
-        weightAppliedToBlended: "Liters",
-      },
+      regions: [],
+      region: "",
     };
   },
+  props: {
+    setValue: { type: Function, required: true },
+    pref: { type: Object, required: true },
+  },
+  mounted() {
+    regionList().then((response) => (this.regions = response.data));
+  },
   methods: {
-    setValue(name, val) {
-      this.pref[name] = val;
-    },
     options(name) {
       return {
         area: ["Hectres", "Acres"],
