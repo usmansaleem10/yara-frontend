@@ -1,4 +1,5 @@
 <template>
+
   <div class="bg-logo">
     <Loader :open="loading" />
     <div>
@@ -6,6 +7,7 @@
         :formValues="calculatorValues"
         :setAttrValue="setAttrValue"
       />
+      <div class="mt-4">
       <div v-if="result.price" class="flex">
         <InputField
           :label="`Price ${result.price}`"
@@ -14,8 +16,10 @@
           :value="result.price"
           :onChange="setResultAttrValue"
         />
-        <div class="ml-10 mt-3 flex text-sm font-medium">
-          <span class="mt-2">
+             </div>
+        
+        <div class="mt-3 flex text-sm font-medium items-center">
+          <span class="mr-4">
             Quantity:
             {{ unitKg ? result.quantity.kg : result.quantity.liter }}</span
           >
@@ -42,10 +46,11 @@
               <span>Kilograms </span>
             </SwitchLabel>
           </SwitchGroup>
-        </div>
+   
       </div>
     </div>
     <Chart v-if="showChart()" :chartData="result.removal" />
+  </div>
   </div>
 </template>
 <script>

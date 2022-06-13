@@ -3,10 +3,10 @@
     <label
       v-if="label && label.length"
       :for="name"
-      class="block text-sm font-medium text-gray-700 mt-1"
+      class="label"
       >{{ label }}</label
     >
-    <div class="mt-1 relative rounded-md shadow-sm">
+    <div class="mt-1 relative ">
       <input
         :type="type"
         :name="name"
@@ -14,7 +14,7 @@
         :min="min"
         :max="max"
         :class="[
-          'block w-full pr-10 sm:text-sm rounded-md',
+          'text-input block w-full pr-10 sm:text-sm rounded mt-3',
           {
             'border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500':
               error,

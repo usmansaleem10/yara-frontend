@@ -1,6 +1,6 @@
 <!-- This example requires Tailwind CSS v2.0+ -->
 <template>
-  <div class="overflow-hidden rounded-lg">
+  <div class="contentWrapper">
     <div class="px-4 py-5 sm:p-6">
       <CalculatorPage v-if="selectedTab == 'Calculate'" />
       <Preferences v-else :pref="pref" :setValue="setValue" />
@@ -72,8 +72,8 @@ export default {
 </script>
 <style scoped>
 .footer {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
+  @apply fixed bottom-0 w-full bg-white border border-t;
 }
+
+
 </style>

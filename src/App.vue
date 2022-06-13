@@ -14,6 +14,6 @@ export default {
 </script>
 <style>
 body {
-  @apply bg-blue-50;
+  @apply bg-gray-50;
 }
 </style>

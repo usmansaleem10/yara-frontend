@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col space-y-3">
-    <label class="block text-sm font-medium text-gray-700 mt-1">Crop</label>
+    <label class="label">Crop</label>
 
     <Multiselect
       v-model="crop"
@@ -21,6 +21,7 @@
       type="number"
       :value="formValues.yieldValue"
       :onChange="setAttrValue"
+      :class="text-input"
     />
     <InputField
       label="Dry Fertilizer Rate"
