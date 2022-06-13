@@ -1,5 +1,5 @@
 <template>
-  <H1>My Preferences</H1>
+  <h1>My Preferences</h1>
   <div class="bg-white shadow overflow-hidden rounded-md mt-5">
     <ul role="list" class="divide-y divide-gray-200">
       <li class="px-6 py-4">
@@ -85,6 +85,13 @@ export default {
   },
   mounted() {
     regionList().then((response) => (this.regions = response.data));
+  },
+  watch: {
+    regions: {
+      handler(newVal) {
+        this.setValue("region", newVal);
+      },
+    },
   },
   methods: {
     options(name) {

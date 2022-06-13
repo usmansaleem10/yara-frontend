@@ -3,7 +3,7 @@
   <div class="contentWrapper">
     <div class="px-4 py-5 sm:p-6">
       <CalculatorPage v-if="selectedTab == 'Calculate'" />
-      <Preferences v-else :pref="pref" :setValue="setValue" />
+      <Preferences v-else :pref="preferences" :setValue="setValue" />
     </div>
     <div class="px-4 py-4 sm:px-6 footer">
       <nav
@@ -47,8 +47,7 @@ export default {
     return {
       tabs: tabs,
       selectedTab: "Calculate",
-
-      pref: {
+      preferences: {
         area: "Hectres",
         weight: "Grams",
         weightAppliedPerArea: "Kg",
@@ -59,7 +58,7 @@ export default {
   },
   methods: {
     setValue(name, val) {
-      this.pref[name] = val;
+      this.preferences[name] = val;
     },
     selectTab(name) {
       this.selectedTab = name;
@@ -74,6 +73,4 @@ export default {
 .footer {
   @apply fixed bottom-0 w-full bg-white border border-t;
 }
-
-
 </style>

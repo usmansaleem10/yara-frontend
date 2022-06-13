@@ -1,5 +1,4 @@
 <template>
-
   <div class="bg-logo">
     <Loader :open="loading" />
     <div>
@@ -8,20 +7,20 @@
         :setAttrValue="setAttrValue"
       />
       <div class="mt-4">
-      <div v-if="result.price" class="flex">
-        <InputField
-          :label="`Price ${result.price}`"
-          name="price"
-          type="range"
-          :value="result.price"
-          :onChange="setResultAttrValue"
-        />
-             </div>
-        
+        <div v-if="result.price" class="flex">
+          <InputField
+            :label="`Price ${result.price}`"
+            name="price"
+            type="range"
+            :value="result.price"
+            :onChange="setResultAttrValue"
+          />
+        </div>
+
         <div class="mt-3 flex text-sm font-medium items-center">
           <span class="mr-4">
             Quantity:
-            {{ unitKg ? result.quantity.kg : result.quantity.liter }}</span
+            {{ resultQuantity() }}</span
           >
           <SwitchGroup as="div" class="flex items-center">
             <SwitchLabel as="span" class="ml-3 mr-2">
@@ -46,11 +45,10 @@
               <span>Kilograms </span>
             </SwitchLabel>
           </SwitchGroup>
-   
+        </div>
       </div>
+      <Chart v-if="showChart()" :chartData="result.removal" />
     </div>
-    <Chart v-if="showChart()" :chartData="result.removal" />
-  </div>
   </div>
 </template>
 <script>
@@ -89,6 +87,16 @@ export default {
     };
   },
   methods: {
+    resultQuantity() {
+      let qunatity = 0;
+      if (this.result.quantity) {
+        qunatity = this.unitKg
+          ? this.result.quantity.kg
+          : this.result.quantity.liter;
+      }
+
+      return qunatity.toFixed(2);
+    },
     showChart() {
       return Object.values(this.result.removal).some((val) => val != null);
     },
