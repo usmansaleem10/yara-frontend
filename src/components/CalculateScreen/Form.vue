@@ -6,7 +6,7 @@
       v-model="crop"
       :mode="'single'"
       :searchable="true"
-      :options="crops"
+      :options="cropDropDownValues"
       placeholder="Please select Crop"
       :canClear="false"
       :value-prop="'id'"
@@ -21,7 +21,7 @@
       type="number"
       :value="formValues.yieldValue"
       :onChange="setAttrValue"
-      :class="text-input"
+      :class="text - input"
     />
     <InputField
       label="Dry Fertilizer Rate"
@@ -35,7 +35,7 @@
       v-model="procote"
       :mode="'single'"
       :searchable="true"
-      :options="procotes"
+      :options="procoteDropDownValues"
       placeholder="Please select Procote"
       :canClear="false"
       :value-prop="'id'"
@@ -48,20 +48,32 @@
 <script>
 import Multiselect from "@vueform/multiselect";
 import { InputField } from "@/components/Shared/index.js";
-import { cropList, procoteList } from "@/utils/services/index.js";
+import { ApiCallMixin } from "@/components/mixins";
 export default {
+  mixins: [ApiCallMixin],
   props: {
     formValues: { type: Object, default: () => {} },
     setAttrValue: { type: Function, required: true },
   },
   components: { Multiselect, InputField },
-  data() {
-    return {
-      procotes: [],
-      crops: [],
-    };
-  },
   computed: {
+    procoteDropDownValues() {
+      return this.procotes.map((procote) => {
+        procote.label = this.procoteLabel(procote.name);
+        return procote;
+      });
+    },
+    cropDropDownValues() {
+      if (!this.crops.length) return [];
+
+      return this.crops.map((crop) => {
+        return {
+          id: crop.id,
+          name: crop.attributes.name,
+          unit: crop.attributes.unit,
+        };
+      });
+    },
     crop: {
       get() {
         return this.formValues.crop;
@@ -89,30 +101,6 @@ export default {
         };
         this.setAttrValue(event);
       },
-    },
-  },
-  mounted() {
-    if (!this.procotes.length || !this.crops.length) this.getDropdownValues();
-  },
-  methods: {
-    procoteLabel(procote) {
-      return {
-        B: "Boron",
-        Mn: "Magnesium",
-        Zn: "Zinc",
-        Cu: "Copper",
-        BMZ: "BMZ",
-        BCMZ: "BCMZ",
-      }[procote];
-    },
-    getDropdownValues() {
-      Promise.all([cropList(), procoteList()]).then(([crops, procotes]) => {
-        this.crops = crops.data;
-        this.procotes = procotes.data.map((procote) => {
-          procote.label = this.procoteLabel(procote.name);
-          return procote;
-        });
-      });
     },
   },
 };
