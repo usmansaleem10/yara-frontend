@@ -23,7 +23,7 @@ export default {
     fetchApiData() {
       Promise.all([cropList(), procoteList()]).then(([crops, procotes]) => {
         this.crops = crops.data.data;
-        this.procotes = procotes.data;
+        this.procotes = procotes.data.data;
       });
     },
   },

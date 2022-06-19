@@ -59,8 +59,10 @@ export default {
   computed: {
     procoteDropDownValues() {
       return this.procotes.map((procote) => {
-        procote.label = this.procoteLabel(procote.name);
-        return procote;
+        return {
+          id: procote.id,
+          label: this.procoteLabel(procote.attributes.name),
+        };
       });
     },
     cropDropDownValues() {
