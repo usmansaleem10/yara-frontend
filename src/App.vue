@@ -1,15 +1,10 @@
 <template>
-  <Calculator />
+  <router-view></router-view>
 </template>
 
 <script>
-import { Calculator } from "@/components/index";
-
 export default {
   name: "App",
-  components: {
-    Calculator,
-  },
 };
 </script>
 <style>
