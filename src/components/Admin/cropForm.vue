@@ -124,12 +124,13 @@ export default {
     async saveFormValues() {
       const result = await this.v$.$validate();
       if (!result) {
-        // TODO: notify user form is invalid
+        this.$toast.error("Validation Failed for the Form!");
         return;
       }
       updateCrop(this.crop.id, { crop: this.cropData }).then(() => {
         this.closeAction();
         this.v$.$reset();
+        this.$toast.success("Crop Updated Successfully!");
       });
     },
   },
