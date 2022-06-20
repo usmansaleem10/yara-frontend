@@ -21,7 +21,7 @@
       type="number"
       :value="formValues.yieldValue"
       :onChange="setAttrValue"
-      :class="text - input"
+      :class="'text-input'"
     />
     <InputField
       label="Dry Fertilizer Rate"

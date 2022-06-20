@@ -54,18 +54,24 @@
                 </TransitionChild>
                 <div class="h-full overflow-y-auto bg-white p-8">
                   <div class="space-y-6 pb-16">
+                    <CropForm
+                      v-if="isEditForm"
+                      :crop="crop"
+                      :procotes="procotes"
+                      :closeAction="closeAction"
+                    />
                     <CropDetailsSection
-                      v-if="crop"
+                      v-else
                       :crop="crop"
                       :procotes="procotes"
                     />
-
                     <div class="flex">
                       <button
+                        @click="() => buttonAction()"
                         type="button"
                         class="flex-1 rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                       >
-                        Edit
+                        {{ buttonText() }}
                       </button>
                       <button
                         @click="closeAction"
@@ -94,8 +100,13 @@ import {
   TransitionRoot,
 } from "@headlessui/vue";
 import { XIcon } from "@heroicons/vue/outline";
-import { CropDetailsSection } from "@/components/index.js";
+import { CropDetailsSection, CropForm } from "@/components/index.js";
 export default {
+  data() {
+    return {
+      isEditForm: false,
+    };
+  },
   components: {
     Dialog,
     DialogPanel,
@@ -103,12 +114,21 @@ export default {
     TransitionRoot,
     XIcon,
     CropDetailsSection,
+    CropForm,
   },
   props: {
     open: { type: Boolean, default: false },
     closeAction: { type: Function, default: () => {} },
     crop: { type: Object, default: () => {} },
     procotes: { type: Array, required: true },
+  },
+  methods: {
+    buttonAction() {
+      this.isEditForm = !this.isEditForm;
+    },
+    buttonText() {
+      return this.isEditForm ? "Back" : "Edit";
+    },
   },
 };
 </script>

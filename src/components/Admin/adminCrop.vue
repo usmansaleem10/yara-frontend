@@ -15,7 +15,7 @@
               :open="cropDetail != null"
               :crop="cropDetail"
               :procotes="procotes"
-              :closeAction="() => (cropDetail = null)"
+              :closeAction="closeAction"
             />
             <table class="min-w-full divide-y divide-gray-300">
               <thead class="bg-gray-50">
@@ -83,6 +83,12 @@ export default {
     return {
       cropDetail: null,
     };
+  },
+  methods: {
+    closeAction() {
+      this.cropDetail = null;
+      this.fetchApiData();
+    },
   },
 };
 </script>
