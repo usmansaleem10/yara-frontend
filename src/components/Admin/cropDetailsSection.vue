@@ -3,13 +3,13 @@
     <h3 class="font-medium text-gray-900">Information</h3>
     <dl class="mt-2 divide-y divide-gray-200 border-t border-b border-gray-200">
       <div class="flex justify-between py-3 text-sm font-medium">
-        <dt class="text-gray-500">Name</dt>
+        <dt class="text-gray-500">Crop</dt>
         <dd class="text-gray-900">
           {{ crop?.attributes?.name }}
         </dd>
       </div>
       <div class="flex justify-between py-3 text-sm font-medium">
-        <dt class="text-gray-500">Unit</dt>
+        <dt class="text-gray-500">Harvest Unit</dt>
         <dd class="text-gray-900">
           {{ crop?.attributes?.unit }}
         </dd>
@@ -17,7 +17,7 @@
     </dl>
   </div>
   <div>
-    <h3 class="font-medium text-gray-900">Removal</h3>
+    <h3 class="font-medium text-gray-900">Removal per Harvest unit(grams)</h3>
     <dl class="mt-2 divide-y divide-gray-200 border-t border-b border-gray-200">
       <div class="flex justify-between py-3 text-sm font-medium">
         <dt class="text-gray-500">Boron</dt>
@@ -46,7 +46,7 @@
     </dl>
   </div>
   <div>
-    <h3 class="font-medium text-gray-900">Procote Ratios</h3>
+    <h3 class="font-medium text-gray-900">Procote Yield Multiplier</h3>
     <dl class="mt-2 divide-y divide-gray-200 border-t border-b border-gray-200">
       <div
         v-for="cropProcote in crop?.attributes?.crop_procotes"
