@@ -15,7 +15,7 @@
         </dd>
       </div>
       <div class="flex justify-between py-3 text-sm font-medium">
-        <dt class="text-gray-500">Magnesium Ratio</dt>
+        <dt class="text-gray-500">Manganese Ratio</dt>
         <dd class="text-gray-900">
           {{ procote?.attributes?.mn_ratio }}
         </dd>

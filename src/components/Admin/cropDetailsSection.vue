@@ -32,7 +32,7 @@
         </dd>
       </div>
       <div class="flex justify-between py-3 text-sm font-medium">
-        <dt class="text-gray-500">Magnesium</dt>
+        <dt class="text-gray-500">Manganese</dt>
         <dd class="text-gray-900">
           {{ crop?.attributes?.removal?.mn_ratio }}
         </dd>

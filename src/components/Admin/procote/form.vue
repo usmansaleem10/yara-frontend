@@ -34,7 +34,7 @@
       :onChange="setAttrValue"
     />
     <InputField
-      label="Magnesium Ratio"
+      label="Manganese Ratio"
       name="mn_ratio"
       type="number"
       :error-text="error(v$.procoteData?.mn_ratio)"

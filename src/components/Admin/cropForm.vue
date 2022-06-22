@@ -27,7 +27,7 @@
         :onChange="setRemovalValue"
       />
       <InputField
-        label="Magnesium Ratio"
+        label="Manganese Ratio"
         name="mn_ratio"
         type="number"
         :error-text="error(v$.cropData?.removal?.mn_ratio)"

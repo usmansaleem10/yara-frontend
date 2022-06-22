@@ -1,6 +1,11 @@
 <template>
   <div class="chart-holder">
-    <apexchart type="bar" height="250" :options="options" :series="chartSeries" />
+    <apexchart
+      type="bar"
+      height="250"
+      :options="options"
+      :series="chartSeries"
+    />
   </div>
 </template>
 <script>
@@ -74,7 +79,7 @@ export default {
     procoteLabel(procote) {
       return {
         b: "Boron",
-        mn: "Magnesium",
+        mn: "Manganese",
         zn: "Zinc",
         cu: "Copper",
       }[procote];

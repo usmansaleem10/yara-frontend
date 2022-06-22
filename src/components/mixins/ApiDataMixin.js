@@ -13,7 +13,7 @@ export default {
     procoteLabel(procote) {
       return {
         B: "Boron",
-        Mn: "Magnesium",
+        Mn: "Manganese",
         Zn: "Zinc",
         Cu: "Copper",
         BMZ: "BMZ",

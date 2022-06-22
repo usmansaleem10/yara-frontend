@@ -128,9 +128,8 @@ export default {
     },
     callApi(crop, procote, yieldValue, dfRate) {
       if (crop == null || procote == null || yieldValue == 0) return;
-
       this.loading = true;
-      calculate(crop.name, procote.name, yieldValue, dfRate)
+      calculate(crop.name, procote.label, yieldValue, dfRate)
         .then((response) => {
           const { details, price, quantity_per_tonne, removal } = response.data;
           this.result.details = details;
