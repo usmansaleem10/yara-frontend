@@ -37,7 +37,7 @@
 </template>
 <script>
 const tabs = [
-  { name: "My Preferances", current: false },
+  { name: "My Preferences", current: false },
   { name: "Calculate", current: true },
 ];
 import { CalculatorPage, Preferences } from "@/components/index.js";
@@ -48,7 +48,7 @@ export default {
       tabs: tabs,
       selectedTab: "Calculate",
       preferences: {
-        area: "Hectres",
+        area: "Hectares",
         weight: "Grams",
         weightAppliedPerArea: "Kg",
         weightAsBlended: "Tonne",

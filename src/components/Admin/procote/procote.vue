@@ -6,7 +6,7 @@
         <div class="px-4 sm:px-6 lg:px-8">
           <div class="sm:flex sm:items-center">
             <div class="sm:flex-auto">
-              <h1 class="text-xl font-semibold text-gray-900">Crops</h1>
+              <h1 class="text-xl font-semibold text-gray-900">Procotes</h1>
             </div>
           </div>
           <div class="mt-8 flex flex-col">
@@ -17,9 +17,9 @@
                 <div
                   class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg"
                 >
-                  <CropDetails
-                    :open="cropDetail != null"
-                    :crop="cropDetail"
+                  <ProcoteDetails
+                    :open="procoteDetail != null"
+                    :procote="procoteDetail"
                     :procotes="procotes"
                     :closeAction="closeAction"
                   />
@@ -36,7 +36,7 @@
                           scope="col"
                           class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                         >
-                          Unit
+                          Density
                         </th>
                         <th
                           scope="col"
@@ -48,26 +48,26 @@
                     </thead>
                     <tbody class="bg-white">
                       <tr
-                        v-for="(crop, cropIdx) in crops"
-                        :key="crop.id"
-                        :class="cropIdx % 2 === 0 ? undefined : 'bg-gray-50'"
+                        v-for="(procote, procoteIdx) in procotes"
+                        :key="procote.id"
+                        :class="procoteIdx % 2 === 0 ? undefined : 'bg-gray-50'"
                       >
                         <td
                           class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6"
                         >
-                          {{ crop.attributes.name }}
+                          {{ procote.attributes.name }}
                         </td>
                         <td
                           class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"
                         >
-                          {{ crop.attributes.unit }}
+                          {{ procote.attributes.density }}
                         </td>
                         <td
                           class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6"
                         >
                           <button
                             class="text-indigo-600 hover:text-indigo-900"
-                            @click="() => (cropDetail = crop)"
+                            @click="() => (procoteDetail = procote)"
                           >
                             Show Details
                           </button>
@@ -87,22 +87,22 @@
 
 <script>
 import { ApiCallMixin } from "@/components/mixins";
-import { CropDetails } from "@/components/index.js";
+import { ProcoteDetails } from "@/components/index.js";
 import { AdminNav } from "@/components/Shared/Admin/index.js";
 export default {
   mixins: [ApiCallMixin],
   components: {
-    CropDetails,
+    ProcoteDetails,
     AdminNav,
   },
   data() {
     return {
-      cropDetail: null,
+      procoteDetail: null,
     };
   },
   methods: {
     closeAction() {
-      this.cropDetail = null;
+      this.procoteDetail = null;
       this.fetchApiData();
     },
   },
