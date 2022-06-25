@@ -10,11 +10,14 @@
       placeholder="Please select Crop"
       :canClear="false"
       :value-prop="'id'"
-      :label="'name'"
       :track-by="'name'"
+      :label="'name'"
       :object="true"
-    />
-
+    >
+      <template #option="{ option }">
+        {{ option.name }} ({{ option.unit }})
+      </template>
+    </Multiselect>
     <InputField
       label="Yield"
       name="yieldValue"
