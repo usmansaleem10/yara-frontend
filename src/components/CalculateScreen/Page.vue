@@ -79,7 +79,7 @@ export default {
       result: {
         details: {},
         price: 0,
-        quantity: 0,
+        quantity: { kg: null, liter: null },
         removal: {},
       },
     };
@@ -91,13 +91,12 @@ export default {
   methods: {
     resultQuantity() {
       let quantity = 0;
-      if (this.result.quantity) {
+      if (this.result.quantity.kg && this.result.quantity.kg) {
         quantity = this.unitKg
           ? this.result.quantity.kg
           : this.result.quantity.liter;
       }
-
-      return quantity.toFixed(2);
+      return quantity ? parseFloat(quantity).toFixed(2) : 0;
     },
     showChart() {
       return Object.values(this.result.removal).some((val) => val != null);

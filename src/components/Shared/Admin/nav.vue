@@ -42,31 +42,24 @@
 
     <DisclosurePanel class="sm:hidden">
       <div class="pt-2 pb-3 space-y-1">
-        <!-- Current: "bg-indigo-50 border-indigo-500 text-indigo-700", Default: "border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700" -->
-        <DisclosureButton
-          as="a"
-          href="#"
-          class="bg-indigo-50 border-indigo-500 text-indigo-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium"
-          >Dashboard</DisclosureButton
+        <router-link
+          to="/admin-crop"
+          :class="[
+            { 'text-indigo-500 ': isCurrentRoute('/admin-crop') },
+            'border-transparent  hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium',
+          ]"
         >
-        <DisclosureButton
-          as="a"
-          href="#"
-          class="border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium"
-          >Team</DisclosureButton
+          Crop
+        </router-link>
+        <router-link
+          to="admin-procote"
+          :class="[
+            { 'text-indigo-500 ': isCurrentRoute('/admin-procote') },
+            'border-transparent  hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium',
+          ]"
         >
-        <DisclosureButton
-          as="a"
-          href="#"
-          class="border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium"
-          >Projects</DisclosureButton
-        >
-        <DisclosureButton
-          as="a"
-          href="#"
-          class="border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium"
-          >Calendar</DisclosureButton
-        >
+          Procote
+        </router-link>
       </div>
     </DisclosurePanel>
   </Disclosure>

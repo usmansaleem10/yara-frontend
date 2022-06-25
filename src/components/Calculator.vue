@@ -73,6 +73,13 @@ export default {
       this.calculatorValues[name] = value;
     },
     tabAction(name) {
+      if (name == "Agronomy") {
+        const url = this.calculatorValues?.procote?.url?.length
+          ? this.calculatorValues.procote.url
+          : "http://www.google.com";
+        window.open(url, "_newtab");
+        return;
+      }
       this.selectTab(name);
     },
     setValue(name, val) {
