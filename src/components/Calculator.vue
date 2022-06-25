@@ -2,7 +2,11 @@
 <template>
   <div class="contentWrapper">
     <div class="px-4 py-5 sm:p-6">
-      <CalculatorPage v-if="selectedTab == 'Calculate'" />
+      <CalculatorPage
+        v-if="selectedTab == 'Calculate'"
+        :calculatorValues="calculatorValues"
+        :setAttrValue="setAttrValue"
+      />
       <Preferences v-else :pref="preferences" :setValue="setValue" />
     </div>
     <div class="px-4 py-4 sm:px-6 footer">
@@ -20,7 +24,7 @@
             'group relative min-w-0 flex-1 overflow-hidden bg-gray-50 py-4 px-4 text-sm font-medium text-center hover:bg-gray-100 focus:z-10',
           ]"
           :aria-current="tab.current ? 'page' : undefined"
-          @click="() => selectTab(tab.name)"
+          @click="() => tabAction(tab.name)"
         >
           <span>{{ tab.name }}</span>
           <span
@@ -37,8 +41,9 @@
 </template>
 <script>
 const tabs = [
-  { name: "My Preferences", current: false },
+  { name: "Agronomy", current: false },
   { name: "Calculate", current: true },
+  { name: "My Preferences", current: false },
 ];
 import { CalculatorPage, Preferences } from "@/components/index.js";
 export default {
@@ -47,6 +52,12 @@ export default {
     return {
       tabs: tabs,
       selectedTab: "Calculate",
+      calculatorValues: {
+        procote: null,
+        crop: null,
+        yieldValue: 0,
+        dfRate: 0,
+      },
       preferences: {
         area: "Hectares",
         weight: "Grams",
@@ -57,6 +68,13 @@ export default {
     };
   },
   methods: {
+    setAttrValue(event) {
+      const { name, value } = event.target;
+      this.calculatorValues[name] = value;
+    },
+    tabAction(name) {
+      this.selectTab(name);
+    },
     setValue(name, val) {
       this.preferences[name] = val;
     },

@@ -68,16 +68,14 @@ export default {
     SwitchLabel,
     Loader,
   },
+  props: {
+    calculatorValues: { type: Object, required: true },
+    setAttrValue: { type: Function, required: true },
+  },
   data() {
     return {
       loading: false,
       unitKg: true,
-      calculatorValues: {
-        procote: null,
-        crop: null,
-        yieldValue: 0,
-        dfRate: 0,
-      },
       result: {
         details: {},
         price: 0,
@@ -86,16 +84,20 @@ export default {
       },
     };
   },
+  mounted() {
+    const { crop, procote, yieldValue, dfRate } = this.calculatorValues;
+    this.calculateResult(crop, procote, yieldValue, dfRate);
+  },
   methods: {
     resultQuantity() {
-      let qunatity = 0;
+      let quantity = 0;
       if (this.result.quantity) {
-        qunatity = this.unitKg
+        quantity = this.unitKg
           ? this.result.quantity.kg
           : this.result.quantity.liter;
       }
 
-      return qunatity.toFixed(2);
+      return quantity.toFixed(2);
     },
     showChart() {
       return Object.values(this.result.removal).some((val) => val != null);
@@ -111,7 +113,6 @@ export default {
       );
     },
     calculateResult(crop, procote, yieldValue, dfRate) {
-      console.log(this.shouldCallApi());
       if (this.shouldCallApi()) {
         this.callApi(crop, procote, yieldValue, dfRate);
       } else {
@@ -148,10 +149,6 @@ export default {
     setResultAttrValue(event) {
       const { name, value } = event.target;
       this.result[name] = value;
-    },
-    setAttrValue(event) {
-      const { name, value } = event.target;
-      this.calculatorValues[name] = value;
     },
   },
   watch: {
