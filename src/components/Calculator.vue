@@ -6,6 +6,7 @@
         v-if="selectedTab == 'Calculate'"
         :calculatorValues="calculatorValues"
         :setAttrValue="setAttrValue"
+        :preferences="preferences"
       />
       <Preferences v-else :pref="preferences" :setValue="setValue" />
     </div>

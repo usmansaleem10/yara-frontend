@@ -24,7 +24,9 @@
           >
           <SwitchGroup as="div" class="flex items-center">
             <SwitchLabel as="span" class="ml-3 mr-2">
-              <span class="text-sm font-medium">Liters </span>
+              <span class="text-sm font-medium"
+                >Liters/{{ preferences.weightAsBlended }}
+              </span>
             </SwitchLabel>
             <Switch
               v-model="unitKg"
@@ -42,7 +44,7 @@
               />
             </Switch>
             <SwitchLabel as="span" class="ml-3">
-              <span>Kilograms </span>
+              <span>Kg/{{ preferences.weightAsBlended }} </span>
             </SwitchLabel>
           </SwitchGroup>
         </div>
@@ -71,6 +73,7 @@ export default {
   props: {
     calculatorValues: { type: Object, required: true },
     setAttrValue: { type: Function, required: true },
+    preferences: { type: Object, required: true },
   },
   data() {
     return {
@@ -95,8 +98,11 @@ export default {
         quantity = this.unitKg
           ? this.result.quantity.kg
           : this.result.quantity.liter;
+        quantity = parseFloat(quantity);
+        if (this.preferences.weightAsBlended == "Ton")
+          quantity = quantity * 0.907185;
       }
-      return quantity ? parseFloat(quantity).toFixed(2) : 0;
+      return quantity ? quantity.toFixed(2) : 0;
     },
     showChart() {
       return Object.values(this.result.removal).some((val) => val != null);
