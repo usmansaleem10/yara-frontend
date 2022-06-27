@@ -50,6 +50,9 @@
         </div>
       </div>
       <Chart v-if="showChart()" :chartData="result.removal" />
+      <div v-else class="p-10 text-gray-500">
+        No removal data is present against this crop
+      </div>
     </div>
   </div>
 </template>
@@ -57,7 +60,6 @@
 import { Chart, CalculatorForm } from "@/components/index.js";
 import { calculate } from "@/utils/services/index.js";
 import { InputField, Loader } from "@/components/Shared/index.js";
-import { calculateChange } from "@/utils/helpers/calculation.js";
 import { Switch, SwitchGroup, SwitchLabel } from "@headlessui/vue";
 
 export default {
@@ -117,25 +119,20 @@ export default {
         (procote && procote.name != result.procote.name)
       );
     },
-    calculateResult(crop, procote, yieldValue, dfRate) {
-      if (this.shouldCallApi()) {
-        this.callApi(crop, procote, yieldValue, dfRate);
-      } else {
-        const res = calculateChange(
-          this.result.details.procote,
-          parseFloat(yieldValue),
-          parseFloat(dfRate),
-          this.result.details.removal,
-          this.result.details.region.currency,
-          this.result.details.procote_multiplier
-        );
-        this.result = Object.assign({}, this.result, res);
-      }
+    procoteValue(procote) {
+      return {
+        Zinc: "Zn",
+        Boron: "B",
+        Manganese: "Mn",
+        Copper: "Cu",
+        BMZ: "BMZ",
+        BCMZ: "BCMZ",
+      }[procote];
     },
-    callApi(crop, procote, yieldValue, dfRate) {
+    calculateResult(crop, procote, yieldValue, dfRate) {
       if (crop == null || procote == null || yieldValue == 0) return;
       this.loading = true;
-      calculate(crop.name, procote.label, yieldValue, dfRate)
+      calculate(crop.name, this.procoteValue(procote.label), yieldValue, dfRate)
         .then((response) => {
           const { details, price, quantity_per_tonne, removal } = response.data;
           this.result.details = details;
