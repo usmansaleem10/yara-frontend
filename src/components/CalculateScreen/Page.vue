@@ -1,7 +1,7 @@
 <template>
   <div class="bg-logo">
     <Loader :open="loading" />
-    <div>
+    <div class="overflow-x-scroll">
       <CalculatorForm
         :formValues="calculatorValues"
         :setAttrValue="setAttrValue"

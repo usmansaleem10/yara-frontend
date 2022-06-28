@@ -3,7 +3,6 @@
     <label v-if="label && label.length" :for="name" class="label">{{
       label
     }}</label>
-    <div v-if="type == 'range'" class="range-value"></div>
     <div class="mt-1 relative">
       <input
         :type="type"

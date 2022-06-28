@@ -18,21 +18,23 @@
         {{ option.name }} ({{ option.unit }})
       </template>
     </Multiselect>
-    <InputField
-      label="Yield"
-      name="yieldValue"
-      type="number"
-      :value="formValues.yieldValue"
-      :onChange="setAttrValue"
-      :class="'text-input'"
-    />
-    <InputField
-      label="Dry Fertilizer Rate"
-      name="dfRate"
-      type="number"
-      :value="formValues.dfRate"
-      :onChange="setAttrValue"
-    />
+    <span class="flex flex-grow">
+      <InputField
+        label="Yield"
+        name="yieldValue"
+        type="number"
+        :value="formValues.yieldValue"
+        :onChange="setAttrValue"
+      />
+      <InputField
+        label="Dry Fertilizer Rate"
+        name="dfRate"
+        type="number"
+        :value="formValues.dfRate"
+        :onChange="setAttrValue"
+        class="ml-2"
+      />
+    </span>
     <label class="block text-sm font-medium text-gray-700 mt-1">Procote</label>
     <Multiselect
       v-model="procote"

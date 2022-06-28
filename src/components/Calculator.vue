@@ -12,7 +12,7 @@
     </div>
     <div class="px-4 py-4 sm:px-6 footer">
       <nav
-        class="relative z-0 rounded-lg shadow flex divide-x divide-gray-200"
+        class="rounded-lg shadow flex divide-x divide-gray-200"
         aria-label="Tabs"
       >
         <span
