@@ -60,7 +60,7 @@ export default {
         dfRate: 0,
       },
       preferences: {
-        region: "",
+        region: "New Brunswick",
         area: "Hectares",
         weight: "Grams",
         weightAppliedPerArea: "Kg",

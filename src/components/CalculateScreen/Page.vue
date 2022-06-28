@@ -142,6 +142,8 @@ export default {
         yieldValue,
         dfRate,
         this.preferences.region.state_name
+          ? this.preferences.region.state_name
+          : this.preferences.region
       )
         .then((response) => {
           const { details, price, quantity_per_tonne, removal } = response.data;

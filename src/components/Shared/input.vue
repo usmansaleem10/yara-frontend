@@ -1,8 +1,9 @@
 <template>
-  <div :class="[{ slidecontainer: type == 'range' }]">
+  <div :class="[{ 'range-wrap': type == 'range' }]">
     <label v-if="label && label.length" :for="name" class="label">{{
       label
     }}</label>
+    <div v-if="type == 'range'" class="range-value"></div>
     <div class="mt-1 relative">
       <input
         :type="type"
@@ -68,42 +69,68 @@ export default {
 };
 </script>
 <style scoped>
-.slidecontainer {
-  width: 100%; /* Width of the outside container */
+input[type="range"] {
+  -webkit-appearance: none;
+  margin: 20px 0;
+  width: 100%;
 }
-
-/* The slider itself */
-.slider {
-  -webkit-appearance: none; /* Override default CSS styles */
-  appearance: none;
-  width: 100%; /* Full-width */
-  height: 25px; /* Specified height */
-  background: #d3d3d3; /* Grey background */
-  outline: none; /* Remove outline */
-  opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
-  -webkit-transition: 0.2s; /* 0.2 seconds transition on hover */
-  transition: opacity 0.2s;
+input[type="range"]:focus {
+  outline: none;
 }
-
-/* Mouse-over effects */
-.slider:hover {
-  opacity: 1; /* Fully shown on mouse-over */
+input[type="range"]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 4px;
+  cursor: pointer;
+  animate: 0.2s;
+  background: #03a9f4;
+  border-radius: 25px;
 }
-
-/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
-.slider::-webkit-slider-thumb {
-  -webkit-appearance: none; /* Override default look */
-  appearance: none;
-  width: 25px; /* Set a specific slider handle width */
-  height: 25px; /* Slider handle height */
-  background: #04aa6d; /* Green background */
-  cursor: pointer; /* Cursor on hover */
+input[type="range"]::-webkit-slider-thumb {
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 1);
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: -8px;
 }
-
-.slider::-moz-range-thumb {
-  width: 25px; /* Set a specific slider handle width */
-  height: 25px; /* Slider handle height */
-  background: #04aa6d; /* Green background */
-  cursor: pointer; /* Cursor on hover */
+input[type="range"]:focus::-webkit-slider-runnable-track {
+  background: #03a9f4;
+}
+.range-wrap {
+  width: 500px;
+  position: relative;
+}
+.range-value {
+  position: absolute;
+  top: -50%;
+}
+.range-value span {
+  width: 30px;
+  height: 24px;
+  line-height: 24px;
+  text-align: center;
+  background: #03a9f4;
+  color: #fff;
+  font-size: 12px;
+  display: block;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 0);
+  border-radius: 6px;
+}
+.range-value span:before {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-top: 10px solid #03a9f4;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  margin-top: -1px;
 }
 </style>
