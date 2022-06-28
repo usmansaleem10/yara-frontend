@@ -18,7 +18,7 @@
             :onChange="setResultAttrValue"
           />
         </div>
-        <div>
+        <div v-if="result?.details?.ml_procote_per_acre">
           Milliliters per acre: {{ result.details.ml_procote_per_acre }}
         </div>
         <div class="mt-3 flex text-sm font-medium items-center">
@@ -29,7 +29,9 @@
           <SwitchGroup as="div" class="flex items-center">
             <SwitchLabel as="span" class="ml-3 mr-2">
               <span class="text-sm font-medium"
-                >Liters/{{ preferences.weightAsBlended }}
+                >{{ preferences.weightAppliedToBlended }}/{{
+                  preferences.weightAsBlended
+                }}
               </span>
             </SwitchLabel>
             <Switch
@@ -48,7 +50,11 @@
               />
             </Switch>
             <SwitchLabel as="span" class="ml-3">
-              <span>Kg/{{ preferences.weightAsBlended }} </span>
+              <span
+                >{{ preferences.weightAppliedPerArea }}/{{
+                  preferences.weightAsBlended
+                }}
+              </span>
             </SwitchLabel>
           </SwitchGroup>
         </div>
@@ -98,6 +104,17 @@ export default {
     this.calculateResult(crop, procote, yieldValue, dfRate);
   },
   methods: {
+    applyPreferences(quantity) {
+      if (this.preferences.weightAsBlended == "Ton")
+        quantity = quantity * 0.907185;
+      if (this.preferences.weightAppliedToBlended == "Quarts")
+        quantity = quantity / 1.05669;
+
+      if (this.preferences.weightAppliedPerArea == "Pounds")
+        quantity = quantity / 2.20462;
+
+      return quantity;
+    },
     resultQuantity() {
       let quantity = 0;
       if (this.result.quantity.kg && this.result.quantity.kg) {
@@ -105,9 +122,8 @@ export default {
           ? this.result.quantity.kg
           : this.result.quantity.liter;
         quantity = parseFloat(quantity);
-        if (this.preferences.weightAsBlended == "Ton")
-          quantity = quantity * 0.907185;
       }
+      quantity = this.applyPreferences(quantity);
       return quantity ? quantity.toFixed(2) : 0;
     },
     showChart() {
