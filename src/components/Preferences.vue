@@ -13,7 +13,7 @@
           :options="regions"
           placeholder="Please select Region"
           :canClear="false"
-          :value-prop="'id'"
+          :value-prop="'state_name'"
           :label="'state_name'"
           :track-by="'state_name'"
           :object="true"
@@ -26,15 +26,6 @@
           :value="pref.area"
           :setValue="setValue"
           :options="options('area')"
-        />
-      </li>
-      <li class="px-6 py-4">
-        <Toggle
-          :details="details('weight')"
-          name="weight"
-          :value="pref.weight"
-          :setValue="setValue"
-          :options="options('weight')"
         />
       </li>
       <li class="px-6 py-4">
@@ -84,10 +75,13 @@ export default {
     pref: { type: Object, required: true },
   },
   mounted() {
-    regionList().then((response) => (this.regions = response.data));
+    regionList().then((response) => {
+      this.regions = response.data;
+      this.region = response.data[0];
+    });
   },
   watch: {
-    regions: {
+    region: {
       handler(newVal) {
         this.setValue("region", newVal);
       },

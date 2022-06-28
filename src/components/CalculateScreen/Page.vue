@@ -12,11 +12,15 @@
             :label="`Price ${result.price}`"
             name="price"
             type="range"
+            :min="0"
+            :max="30"
             :value="result.price"
             :onChange="setResultAttrValue"
           />
         </div>
-
+        <div>
+          Milliliters per acre: {{ result.details.ml_procote_per_acre }}
+        </div>
         <div class="mt-3 flex text-sm font-medium items-center">
           <span class="mr-4">
             Quantity:
@@ -50,7 +54,7 @@
         </div>
       </div>
       <Chart v-if="showChart()" :chartData="result.removal" />
-      <div v-else class="p-10 text-gray-500">
+      <div v-else-if="result.price" class="p-10 text-gray-500">
         No removal data is present against this crop
       </div>
     </div>
@@ -132,7 +136,13 @@ export default {
     calculateResult(crop, procote, yieldValue, dfRate) {
       if (crop == null || procote == null || yieldValue == 0) return;
       this.loading = true;
-      calculate(crop.name, this.procoteValue(procote.label), yieldValue, dfRate)
+      calculate(
+        crop.name,
+        this.procoteValue(procote.label),
+        yieldValue,
+        dfRate,
+        this.preferences.region.state_name
+      )
         .then((response) => {
           const { details, price, quantity_per_tonne, removal } = response.data;
           this.result.details = details;
@@ -148,8 +158,32 @@ export default {
     setLoading(value) {
       this.loading = value;
     },
+    calculateMlPerAcre(value) {
+      const procote_amount =
+        this.result.details.procote[this.result.details.region.currency] / 1000;
+      this.result.details.ml_procote_per_acre = (
+        value / procote_amount
+      ).toFixed(2);
+    },
+    calculateQuantity() {
+      const LBS_PER_METRIC_TON = 2204.62;
+      const dfRate = parseFloat(this.calculatorValues.dfRate);
+      const mlPerAcre = parseFloat(this.result.details.ml_procote_per_acre);
+      const literValue = (
+        ((LBS_PER_METRIC_TON / dfRate) * mlPerAcre) /
+        1000
+      ).toFixed(2);
+      this.result.quantity.liter = literValue;
+      this.result.quantity.kg =
+        this.result.details.procote.density * literValue;
+    },
+    calculatePriceChangeResult(value) {
+      this.calculateMlPerAcre(value);
+      this.calculateQuantity();
+    },
     setResultAttrValue(event) {
       const { name, value } = event.target;
+      this.calculatePriceChangeResult(value);
       this.result[name] = value;
     },
   },

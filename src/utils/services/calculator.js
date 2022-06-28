@@ -1,6 +1,6 @@
 import { post } from "./api";
 
-export const calculate = (crop, procote, yieldValue, dfRate) => {
+export const calculate = (crop, procote, yieldValue, dfRate, state) => {
   const url = "/calculate";
   const body = {
     crop,
@@ -8,7 +8,7 @@ export const calculate = (crop, procote, yieldValue, dfRate) => {
     yield_value: yieldValue,
     df_rate: dfRate,
     preferences: {
-      state: "New Brunswick",
+      state: state,
     },
   };
 

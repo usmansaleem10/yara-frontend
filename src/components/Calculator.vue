@@ -60,6 +60,7 @@ export default {
         dfRate: 0,
       },
       preferences: {
+        region: "",
         area: "Hectares",
         weight: "Grams",
         weightAppliedPerArea: "Kg",
