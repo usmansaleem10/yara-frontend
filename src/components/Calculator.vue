@@ -66,6 +66,7 @@ export default {
         weightAppliedPerArea: "Kg",
         weightAsBlended: "Tonne",
         weightAppliedToBlended: "Liters",
+        procoteAsAppliedPerArea: "Milliliters",
       },
     };
   },

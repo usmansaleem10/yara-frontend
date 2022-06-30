@@ -9,7 +9,7 @@
       :onChange="setAttrValue"
     />
     <InputField
-      label="Density"
+      label="Density(Kg/l)"
       name="density"
       type="text"
       :error-text="error(v$.procoteData?.density)"
@@ -24,9 +24,11 @@
       :value="procoteData.url"
       :onChange="setAttrValue"
     />
-    <h3 class="text-lg leading-6 font-medium text-gray-900 mt-4">Ratios</h3>
+    <h3 class="text-lg leading-6 font-medium text-gray-900 mt-4">
+      Analysis(g/ml)
+    </h3>
     <InputField
-      label="Boron Ratio"
+      label="Boron Analysis(g/ml)"
       name="b_ratio"
       type="number"
       :error-text="error(v$.procoteData?.b_ratio)"
@@ -34,7 +36,7 @@
       :onChange="setAttrValue"
     />
     <InputField
-      label="Manganese Ratio"
+      label="Manganese Analysis(g/ml)"
       name="mn_ratio"
       type="number"
       :error-text="error(v$.procoteData?.mn_ratio)"
@@ -42,7 +44,7 @@
       :onChange="setAttrValue"
     />
     <InputField
-      label="Zinc Ratio"
+      label="Zinc Analysis(g/ml)"
       name="zn_ratio"
       type="number"
       :error-text="error(v$.procoteData?.zn_ratio)"
@@ -50,7 +52,7 @@
       :onChange="setAttrValue"
     />
     <InputField
-      label="Copper Ratio"
+      label="Copper Analysis(g/ml)"
       name="cu_ratio"
       type="number"
       :error-text="error(v$.procoteData?.cu_ratio)"

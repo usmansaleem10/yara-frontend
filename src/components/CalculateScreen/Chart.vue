@@ -54,6 +54,9 @@ export default {
           labels: {
             show: true,
             hideOverlappingLabels: true,
+            formatter: function (val) {
+              return `${val}%`;
+            },
           },
         },
         xaxis: {

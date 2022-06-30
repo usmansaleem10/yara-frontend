@@ -19,7 +19,7 @@
     <span v-if="cropData.removal">
       <h3 class="text-lg leading-6 font-medium text-gray-900 mt-4">Removal</h3>
       <InputField
-        label="Boron Ratio"
+        label="Boron (grams per harvested unit)"
         name="b_ratio"
         type="number"
         :error-text="error(v$.cropData?.removal?.b_ratio)"
@@ -27,7 +27,7 @@
         :onChange="setRemovalValue"
       />
       <InputField
-        label="Manganese Ratio"
+        label="Manganese (grams per harvested unit)"
         name="mn_ratio"
         type="number"
         :error-text="error(v$.cropData?.removal?.mn_ratio)"
@@ -35,7 +35,7 @@
         :onChange="setRemovalValue"
       />
       <InputField
-        label="Copper Ratio"
+        label="Copper (grams per harvested unit)"
         name="cu_ratio"
         type="number"
         :error-text="error(v$.cropData?.removal?.cu_ratio)"
@@ -43,7 +43,7 @@
         :onChange="setRemovalValue"
       />
       <InputField
-        label="Zinc Ratio"
+        label="Zinc (grams per harvested unit)"
         name="zn_ratio"
         type="number"
         :error-text="error(v$.cropData?.removal?.zn_ratio)"

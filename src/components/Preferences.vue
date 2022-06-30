@@ -21,6 +21,15 @@
       </li>
       <li class="px-6 py-4">
         <Toggle
+          :details="details('procoteAsAppliedPerArea')"
+          name="procoteAsAppliedPerArea"
+          :value="pref.procoteAsAppliedPerArea"
+          :setValue="setValue"
+          :options="options('procoteAsAppliedPerArea')"
+        />
+      </li>
+      <li class="px-6 py-4">
+        <Toggle
           :details="details('area')"
           name="area"
           :value="pref.area"
@@ -95,6 +104,7 @@ export default {
         weightAppliedPerArea: ["Pounds", "Kilograms"],
         weightAsBlended: ["Ton", "Tonne"],
         weightAppliedToBlended: ["Quarts", "Liters"],
+        procoteAsAppliedPerArea: ["Milliliters", "Ounces"],
       }[name];
     },
     details(name) {
@@ -106,13 +116,16 @@ export default {
           heading: "Micronutriats as applied",
         },
         weightAppliedPerArea: {
-          heading: "Dry Fertilizer as Applied/Area",
+          heading: "Procote Applied to Blend",
         },
         weightAsBlended: {
           heading: "Dry Fertilizer as Blended",
         },
         weightAppliedToBlended: {
           heading: "Procote Applied to blend",
+        },
+        procoteAsAppliedPerArea: {
+          heading: "Procote as Applied Per Area",
         },
       }[name];
     },

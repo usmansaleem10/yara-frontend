@@ -9,7 +9,7 @@
       <div class="mt-4">
         <div v-if="result.price" class="flex">
           <InputField
-            :label="`Price ${result.price}`"
+            :label="`Price: $${result.price}`"
             name="price"
             type="range"
             :min="0"
@@ -19,7 +19,8 @@
           />
         </div>
         <div v-if="result?.details?.ml_procote_per_acre">
-          Milliliters per acre: {{ result.details.ml_procote_per_acre }}
+          {{ preferences.procoteAsAppliedPerArea }} per acre:
+          {{ procoteAppliedValue() }}
         </div>
         <div class="mt-3 flex text-sm font-medium items-center">
           <span class="mr-4">
@@ -104,12 +105,17 @@ export default {
     this.calculateResult(crop, procote, yieldValue, dfRate);
   },
   methods: {
+    procoteAppliedValue() {
+      let result = this.result.details.ml_procote_per_acre;
+      if (this.preferences.procoteAsAppliedPerArea == "Ounces")
+        result = (result / 29.574).toFixed();
+      return result;
+    },
     applyPreferences(quantity) {
       if (this.preferences.weightAsBlended == "Ton")
         quantity = quantity * 0.907185;
       if (this.preferences.weightAppliedToBlended == "Quarts")
         quantity = quantity / 1.05669;
-
       if (this.preferences.weightAppliedPerArea == "Pounds")
         quantity = quantity / 2.20462;
 
@@ -124,7 +130,7 @@ export default {
         quantity = parseFloat(quantity);
       }
       quantity = this.applyPreferences(quantity);
-      return quantity ? quantity.toFixed(2) : 0;
+      return quantity ? quantity.toFixed(1) : 0;
     },
     showChart() {
       return Object.values(this.result.removal).some((val) => val != null);
