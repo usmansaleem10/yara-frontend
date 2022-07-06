@@ -31,7 +31,10 @@
       />
       </div>
       <div>
-        <img width="100" class="mx-auto" src="https://brandeps.com/logo-download/Y/Yara-logo-vector-01.svg" alt="logo">
+        <img width="90" class="mx-auto" src="https://brandeps.com/logo-download/Y/Yara-logo-vector-01.svg" alt="logo">
+        <div class="block font-bold text-center text-xl mb-1 text-blue-900">
+          ApplyIt
+        </div>
       </div>
     </div>
     <span>
