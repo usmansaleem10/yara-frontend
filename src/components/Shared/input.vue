@@ -107,7 +107,7 @@ input[type="range"]:focus::-webkit-slider-runnable-track {
 }
 .range-value span {
   width: 30px;
-  height: 24px;
+  
   line-height: 24px;
   text-align: center;
   background: #03a9f4;
