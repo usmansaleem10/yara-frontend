@@ -18,7 +18,7 @@
             :onChange="setResultAttrValue"
           />
         </div>
-        <div class="" v-if="result?.details?.ml_procote_per_acre">
+        <div class="block font-bold text-center text-xl mb-1 text-blue-900" v-if="result?.details?.ml_procote_per_acre">
           {{ preferences.procoteAsAppliedPerArea }} per acre:
           {{ procoteAppliedValue() }}
         </div>
