@@ -6,6 +6,10 @@
         :formValues="calculatorValues"
         :setAttrValue="setAttrValue"
       />
+      <Chart v-if="showChart()" :chartData="result.removal" />
+      <div v-else-if="result.price" class="p-10 text-gray-500">
+        No removal data is present against this crop
+      </div>
       <div class="mt-1">
         <div v-if="result.price" class="flex">
           <InputField
@@ -35,11 +39,12 @@
           >
           <SwitchGroup as="div" class="flex items-center">
             <SwitchLabel as="span" class="mr-2">
-              <!-- <span class="block font-bold text-center text-xl mb-1 text-blue-900"
+              <span
+                class="block font-bold text-center text-xl mb-1 text-blue-900"
                 >{{ preferences.weightAppliedToBlended }}/{{
                   preferences.weightAsBlended
                 }}
-              </span> -->
+              </span>
             </SwitchLabel>
             <Switch
               v-model="unitKg"
@@ -65,10 +70,6 @@
             </SwitchLabel>
           </SwitchGroup>
         </div>
-      </div>
-      <Chart v-if="showChart()" :chartData="result.removal" />
-      <div v-else-if="result.price" class="p-10 text-gray-500">
-        No removal data is present against this crop
       </div>
     </div>
   </div>
@@ -129,25 +130,26 @@ export default {
       return result;
     },
     applyPreferences(quantity) {
-      if (this.preferences.weightAsBlended == "Ton")
-        quantity = quantity * 0.907185;
-      if (this.preferences.weightAppliedToBlended == "Quarts")
-        quantity = quantity / 1.05669;
-      if (this.preferences.weightAppliedPerArea == "Pounds")
-        quantity = quantity / 2.20462;
+      let changedQuantity = quantity;
 
-      return quantity;
+      if (this.preferences.weightAsBlended == "Ton")
+        changedQuantity = changedQuantity * 0.907185;
+      if (this.preferences.weightAppliedToBlended == "Quarts")
+        changedQuantity = changedQuantity / 1.05669;
+      if (this.preferences.weightAppliedPerArea == "Pounds")
+        changedQuantity = changedQuantity / 2.20462;
+      return changedQuantity;
     },
     resultQuantity() {
       let quantity = 0;
-      if (this.result.quantity.kg && this.result.quantity.kg) {
+      if (this.result.quantity.kg && this.result.quantity.liter) {
         quantity = this.unitKg
           ? this.result.quantity.kg
           : this.result.quantity.liter;
         quantity = parseFloat(quantity);
       }
       quantity = this.applyPreferences(quantity);
-      return quantity ? this.roundUpNearest(10, quantity) : 0;
+      return quantity ? quantity.toFixed(2) : 0;
     },
     showChart() {
       return Object.values(this.result.removal).some((val) => val != null);

@@ -28,7 +28,7 @@ html {
 }
 
 .chart-holder {
-  @apply bg-white p-4  shadow-lg rounded border border-gray-300 -mt-1;
+  @apply bg-white p-4  shadow-lg rounded border border-gray-300;
 }
 
 .multiselect-search {
