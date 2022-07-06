@@ -28,10 +28,10 @@ html {
 }
 
 .chart-holder {
-  @apply bg-white p-4 mt-4 shadow-lg rounded border border-gray-300;
+  @apply bg-white p-4  shadow-lg rounded border border-gray-300 -mt-1;
 }
 
-.multiselect-search  {
+.multiselect-search {
   background: #3a84b6 !important;
   color: #fff;
 }

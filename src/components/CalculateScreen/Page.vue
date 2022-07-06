@@ -6,7 +6,7 @@
         :formValues="calculatorValues"
         :setAttrValue="setAttrValue"
       />
-      <div class="mt-4">
+      <div class="mt-1">
         <div v-if="result.price" class="flex">
           <InputField
             name="price"
