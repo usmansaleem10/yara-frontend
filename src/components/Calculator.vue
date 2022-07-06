@@ -1,7 +1,7 @@
 <!-- This example requires Tailwind CSS v2.0+ -->
 <template>
   <div class="contentWrapper">
-    <div class="sm:px-4 py-5 sm:p-6 p-0 bg-custom">
+    <div class="py-5 bg-custom">
       <CalculatorPage
         v-if="selectedTab == 'Calculate'"
         :calculatorValues="calculatorValues"
@@ -10,7 +10,7 @@
       />
       <Preferences v-else :pref="preferences" :setValue="setValue" />
     </div>
-    <div class="px-4 py-4 sm:px-6 footer">
+    <div class="footer">
       <nav
         class="flex"
         aria-label="Tabs"
