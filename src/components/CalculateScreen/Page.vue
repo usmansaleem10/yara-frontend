@@ -17,7 +17,7 @@
             :onChange="setResultAttrValue"
           />
         </div>
-        price: ${{ roundOfCents(result.price) }}
+        price: ${{ applyPricePreference() }}
         <div v-if="result?.details?.ml_procote_per_acre">
           {{ preferences.procoteAsAppliedPerArea }} per acre:
           {{ procoteAppliedValue() }}
@@ -105,8 +105,13 @@ export default {
     this.calculateResult(crop, procote, yieldValue, dfRate);
   },
   methods: {
+    applyPricePreference() {
+      let price = this.result.price;
+
+      return this.roundOfCents(price);
+    },
     roundOfCents(number) {
-      return Math.round(number * 10) / 10;
+      return (Math.round(number * 10) / 10).toFixed(2);
     },
     roundUpNearest(roundOfNum, num) {
       return Math.ceil(num / roundOfNum) * roundOfNum;
@@ -207,9 +212,19 @@ export default {
       this.result.quantity.kg =
         this.result.details.procote.density * literValue;
     },
+    calculateRemovalRatio() {
+      const { ml_procote_per_acre, procote, removal } = this.result.details;
+      Object.keys(this.result.removal).forEach((ratio) => {
+        const removalValue =
+          (parseFloat(ml_procote_per_acre) * procote[ratio]) /
+          (this.calculatorValues.yieldValue * removal[ratio]);
+        this.result.removal[ratio] = removalValue.toFixed(2) * 100;
+      });
+    },
     calculatePriceChangeResult(value) {
       this.calculateMlPerAcre(value);
       this.calculateQuantity();
+      this.calculateRemovalRatio();
     },
     setResultAttrValue(event) {
       const { name, value } = event.target;
