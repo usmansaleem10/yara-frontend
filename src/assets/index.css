@@ -30,3 +30,31 @@ html {
 .chart-holder {
   @apply bg-white p-4 mt-4 shadow-lg rounded border border-gray-300;
 }
+
+.multiselect-search  {
+  background: #3a84b6 !important;
+  color: #fff;
+}
+
+.multiselect-single-label {
+  color: #fff;
+  font-size: 1.2rem;
+}
+
+.multiselect-placeholder {
+  color: #fff !important;
+  font-size: 1.2rem;
+}
+
+.multiselect-caret {
+  background: #fff !important;
+}
+
+.input-field {
+  width: 100%;
+  padding: 6px 16px;
+  background: #3a84b6 !important;
+  border-radius: 4px;
+  color: #fff;
+  font-size: 1.2rem;
+}
