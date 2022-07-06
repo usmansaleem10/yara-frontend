@@ -1,47 +1,55 @@
 <template>
   <div class="flex flex-col space-y-3">
-    <label class="label">Crop</label>
+    <div class="grid grid-cols-2 gap-4">
+      <div>
+        <label class="block font-bold text-center text-xl mb-1 text-blue-900">Crop</label>
 
-    <Multiselect
-      v-model="crop"
-      :mode="'single'"
-      :searchable="true"
-      :options="cropDropDownValues"
-      placeholder="Please select Crop"
-      :canClear="false"
-      :value-prop="'id'"
-      :track-by="'name'"
-      :label="'name'"
-      :object="true"
-    >
-      <template #option="{ option }">
-        {{ option.name }} ({{ option.unit }})
-      </template>
-    </Multiselect>
-    <span class="flex flex-grow">
-      <InputField
+        <Multiselect
+          v-model="crop"
+          :mode="'single'"
+          :searchable="true"
+          :options="cropDropDownValues"
+          placeholder="Select Crop"
+          :canClear="false"
+          :value-prop="'id'"
+          :track-by="'name'"
+          :label="'name'"
+          :object="true"
+        >
+          <template #option="{ option }">
+            {{ option.name }} ({{ option.unit }})
+          </template>
+        </Multiselect>
+
+        <InputField
         label="Yield"
         name="yieldValue"
         type="number"
         :value="formValues.yieldValue"
         :onChange="setAttrValue"
+        class="mt-3"
       />
+      </div>
+      <div>
+        <img width="100" class="mx-auto" src="https://brandeps.com/logo-download/Y/Yara-logo-vector-01.svg" alt="logo">
+      </div>
+    </div>
+    <span>
       <InputField
         label="Dry Fertilizer Rate"
         name="dfRate"
         type="number"
         :value="formValues.dfRate"
         :onChange="setAttrValue"
-        class="ml-2"
       />
     </span>
-    <label class="block text-sm font-medium text-gray-700 mt-1">Procote</label>
+    <label class="block font-bold text-center text-xl mb-1 text-blue-900">YaraVita PROCOTE</label>
     <Multiselect
       v-model="procote"
       :mode="'single'"
       :searchable="true"
       :options="procoteDropDownValues"
-      placeholder="Please select Procote"
+      placeholder="Select Procote"
       :canClear="false"
       :value-prop="'id'"
       :label="'label'"
@@ -112,4 +120,5 @@ export default {
   },
 };
 </script>
-<style src="@vueform/multiselect/themes/default.css"></style>
+<style src="@vueform/multiselect/themes/default.css">
+</style>

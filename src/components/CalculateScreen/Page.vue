@@ -17,28 +17,29 @@
             :onChange="setResultAttrValue"
           />
         </div>
-        price: ${{ applyPricePreference() }}
-        <div v-if="result?.details?.ml_procote_per_acre">
+        <div class="" v-if="result?.details?.ml_procote_per_acre">
           {{ preferences.procoteAsAppliedPerArea }} per acre:
           {{ procoteAppliedValue() }}
         </div>
-        <div class="mt-3 flex text-sm font-medium items-center">
-          <span class="mr-4">
+        <div class="mt-3 flex text-sm font-medium items-center justify-center">
+          <span
+            class="mr-4 block font-bold text-center text-xl mb-1 text-blue-900"
+          >
             Quantity:
             {{ resultQuantity() }}</span
           >
           <SwitchGroup as="div" class="flex items-center">
-            <SwitchLabel as="span" class="ml-3 mr-2">
-              <span class="text-sm font-medium"
+            <SwitchLabel as="span" class="mr-2">
+              <!-- <span class="block font-bold text-center text-xl mb-1 text-blue-900"
                 >{{ preferences.weightAppliedToBlended }}/{{
                   preferences.weightAsBlended
                 }}
-              </span>
+              </span> -->
             </SwitchLabel>
             <Switch
               v-model="unitKg"
               :class="[
-                unitKg ? 'bg-teal-600' : 'bg-gray-200',
+                unitKg ? 'bg-blue-500' : 'bg-gray-400',
                 'relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500',
               ]"
             >
@@ -51,7 +52,7 @@
               />
             </Switch>
             <SwitchLabel as="span" class="ml-3">
-              <span
+              <span class="block font-bold text-xl mb-1 text-blue-900"
                 >{{ preferences.weightAppliedPerArea }}/{{
                   preferences.weightAsBlended
                 }}
