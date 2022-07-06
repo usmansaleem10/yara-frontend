@@ -17,10 +17,14 @@
             :onChange="setResultAttrValue"
           />
         </div>
-        price: ${{ roundOfCents(result.price) }}
-        <div v-if="result?.details?.ml_procote_per_acre">
-          {{ preferences.procoteAsAppliedPerArea }} per acre:
-          {{ procoteAppliedValue() }}
+        <div class="flex justify-between">
+          <div v-if="result?.details?.ml_procote_per_acre">
+            {{ preferences.procoteAsAppliedPerArea }} per acre:
+            {{ procoteAppliedValue() }}
+          </div>
+          <label class="block font-bold text-center text-xl mb-1 text-blue-900"
+            >Price: ${{ applyPricePreference() }}/Ac</label
+          >
         </div>
         <div class="mt-3 flex text-sm font-medium items-center justify-center">
           <span
