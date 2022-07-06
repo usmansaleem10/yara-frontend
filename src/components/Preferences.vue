@@ -16,7 +16,6 @@
           :value-prop="'state_name'"
           :label="'state_name'"
           :track-by="'state_name'"
-          :object="true"
         />
       </li>
       <li class="px-6 py-4">
@@ -26,24 +25,6 @@
           :value="pref.procoteAsAppliedPerArea"
           :setValue="setValue"
           :options="options('procoteAsAppliedPerArea')"
-        />
-      </li>
-      <li class="px-6 py-4">
-        <Toggle
-          :details="details('area')"
-          name="area"
-          :value="pref.area"
-          :setValue="setValue"
-          :options="options('area')"
-        />
-      </li>
-      <li class="px-6 py-4">
-        <Toggle
-          :details="details('weightAppliedPerArea')"
-          name="weightAppliedPerArea"
-          :value="pref.weightAppliedPerArea"
-          :setValue="setValue"
-          :options="options('weightAppliedPerArea')"
         />
       </li>
       <li class="px-6 py-4">
@@ -64,6 +45,15 @@
           :options="options('weightAppliedToBlended')"
         />
       </li>
+      <li class="px-6 py-4">
+        <Toggle
+          :details="details('weightAppliedPerArea')"
+          name="weightAppliedPerArea"
+          :value="pref.weightAppliedPerArea"
+          :setValue="setValue"
+          :options="options('weightAppliedPerArea')"
+        />
+      </li>
     </ul>
   </div>
 </template>
@@ -76,7 +66,7 @@ export default {
   data() {
     return {
       regions: [],
-      region: "",
+      region: this.pref.region,
     };
   },
   props: {
@@ -86,20 +76,18 @@ export default {
   mounted() {
     regionList().then((response) => {
       this.regions = response.data;
-      this.region = response.data[0];
     });
   },
   watch: {
     region: {
-      handler(newVal) {
-        this.setValue("region", newVal);
+      handler(val) {
+        this.setValue("region", val);
       },
     },
   },
   methods: {
     options(name) {
       return {
-        area: ["Hectres", "Acres"],
         weight: ["Pounds", "Grams"],
         weightAppliedPerArea: ["Pounds", "Kilograms"],
         weightAsBlended: ["Ton", "Tonne"],

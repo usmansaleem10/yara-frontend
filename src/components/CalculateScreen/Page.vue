@@ -9,7 +9,6 @@
       <div class="mt-4">
         <div v-if="result.price" class="flex">
           <InputField
-            :label="`Price: $${result.price}`"
             name="price"
             type="range"
             :min="0"
@@ -18,6 +17,7 @@
             :onChange="setResultAttrValue"
           />
         </div>
+        price: ${{ roundOfCents(result.price) }}
         <div v-if="result?.details?.ml_procote_per_acre">
           {{ preferences.procoteAsAppliedPerArea }} per acre:
           {{ procoteAppliedValue() }}
@@ -105,6 +105,12 @@ export default {
     this.calculateResult(crop, procote, yieldValue, dfRate);
   },
   methods: {
+    roundOfCents(number) {
+      return Math.round(number * 10) / 10;
+    },
+    roundUpNearest(roundOfNum, num) {
+      return Math.ceil(num / roundOfNum) * roundOfNum;
+    },
     procoteAppliedValue() {
       let result = this.result.details.ml_procote_per_acre;
       if (this.preferences.procoteAsAppliedPerArea == "Ounces")
@@ -130,7 +136,7 @@ export default {
         quantity = parseFloat(quantity);
       }
       quantity = this.applyPreferences(quantity);
-      return quantity ? quantity.toFixed(1) : 0;
+      return quantity ? this.roundUpNearest(10, quantity) : 0;
     },
     showChart() {
       return Object.values(this.result.removal).some((val) => val != null);
