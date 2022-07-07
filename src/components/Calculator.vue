@@ -1,7 +1,7 @@
 <!-- This example requires Tailwind CSS v2.0+ -->
 <template>
   <div class="contentWrapper">
-    <div class="bg-custom">
+    <div>
       <CalculatorPage
         v-if="selectedTab == 'Calculate'"
         :calculatorValues="calculatorValues"

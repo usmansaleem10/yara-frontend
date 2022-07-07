@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-logo">
+  <div class="bg-logo bg-custom">
     <Loader :open="loading" />
     <div class="overflow-x-scroll">
       <CalculatorForm
@@ -21,18 +21,18 @@
             :onChange="setResultAttrValue"
           />
         </div>
-        <div class="flex justify-between">
-          <div v-if="result?.details?.ml_procote_per_acre">
+        <div class="flex justify-evenly px-2">
+          <div class="block font-bold text-center text-lg mb-1 text-blue-900" v-if="result?.details?.ml_procote_per_acre">
             {{ preferences.procoteAsAppliedPerArea }} per acre:
             {{ procoteAppliedValue() }}
           </div>
-          <label class="block font-bold text-center text-xl mb-1 text-blue-900"
+          <label class="block font-bold text-center text-lg mb-1 text-blue-900"
             >Price: ${{ applyPricePreference() }}/Ac</label
           >
         </div>
-        <div class="mt-3 flex text-sm font-medium items-center justify-center">
+        <div class="px-2 mt-3 flex text-sm font-medium items-center justify-evenly">
           <span
-            class="mr-4 block font-bold text-center text-xl mb-1 text-blue-900"
+            class="mr-4 block font-bold text-center text-lg mb-1 text-blue-900"
           >
             Quantity:
             {{ resultQuantity() }}</span
@@ -40,7 +40,7 @@
           <SwitchGroup as="div" class="flex items-center">
             <SwitchLabel as="span" class="mr-2">
               <span
-                class="block font-bold text-center text-xl mb-1 text-blue-900"
+                class="block font-bold text-center text-lg mb-1 text-blue-900"
                 >{{ preferences.weightAppliedToBlended }}/{{
                   preferences.weightAsBlended
                 }}
@@ -50,7 +50,7 @@
               v-model="unitKg"
               :class="[
                 unitKg ? 'bg-blue-500' : 'bg-gray-400',
-                'relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500',
+                'mx-2 relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500',
               ]"
             >
               <span
@@ -62,7 +62,7 @@
               />
             </Switch>
             <SwitchLabel as="span" class="ml-3">
-              <span class="block font-bold text-xl mb-1 text-blue-900"
+              <span class="block font-bold text-lg mb-1 text-blue-900"
                 >{{ preferences.weightAppliedPerArea }}/{{
                   preferences.weightAsBlended
                 }}

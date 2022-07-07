@@ -1,9 +1,17 @@
 <template>
-  <h1>My Preferences</h1>
+  <div class="flex items-center justify-evenly">
+    <h1 class="block font-bold text-center text-xl mb-1 text-blue-900">User Preferences</h1>
+    <div>
+      <img width="90" class="mx-auto" src="https://brandeps.com/logo-download/Y/Yara-logo-vector-01.svg" alt="logo">
+      <div class="block font-bold text-center text-xl mb-1 text-blue-900">
+        ApplyIt
+      </div>
+    </div>
+  </div>
   <div class="bg-white shadow overflow-hidden rounded-md mt-5">
     <ul role="list" class="divide-y divide-gray-200">
-      <li class="px-6 py-4">
-        <label class="block text-sm font-medium text-gray-700 mt-1"
+      <li class="py-4">
+        <label class="block font-bold text-center text-xl mb-2 text-blue-900"
           >Region</label
         >
         <Multiselect
@@ -18,7 +26,7 @@
           :track-by="'state_name'"
         />
       </li>
-      <li class="px-6 py-4">
+      <li class="py-4">
         <Toggle
           :details="details('procoteAsAppliedPerArea')"
           name="procoteAsAppliedPerArea"
@@ -27,7 +35,7 @@
           :options="options('procoteAsAppliedPerArea')"
         />
       </li>
-      <li class="px-6 py-4">
+      <li class="py-4">
         <Toggle
           :details="details('weightAsBlended')"
           name="weightAsBlended"
@@ -36,7 +44,7 @@
           :options="options('weightAsBlended')"
         />
       </li>
-      <li class="px-6 py-4">
+      <li class="py-4">
         <Toggle
           :details="details('weightAppliedToBlended')"
           name="weightAppliedToBlended"
@@ -45,7 +53,7 @@
           :options="options('weightAppliedToBlended')"
         />
       </li>
-      <li class="px-6 py-4">
+      <li class="py-4">
         <Toggle
           :details="details('weightAppliedPerArea')"
           name="weightAppliedPerArea"
