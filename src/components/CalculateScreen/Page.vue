@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-logo bg-custom">
+  <div class="bg-logo bg-custom p-1">
     <Loader :open="loading" />
     <div class="overflow-x-scroll">
       <CalculatorForm
@@ -22,7 +22,10 @@
           />
         </div>
         <div class="flex justify-evenly px-2">
-          <div class="block font-bold text-center text-lg mb-1 text-blue-900" v-if="result?.details?.ml_procote_per_acre">
+          <div
+            class="block font-bold text-center text-lg mb-1 text-blue-900"
+            v-if="result?.details?.ml_procote_per_acre"
+          >
             {{ preferences.procoteAsAppliedPerArea }} per acre:
             {{ procoteAppliedValue() }}
           </div>
@@ -30,7 +33,9 @@
             >Price: ${{ applyPricePreference() }}/Ac</label
           >
         </div>
-        <div class="px-2 mt-3 flex text-sm font-medium items-center justify-evenly">
+        <div
+          class="px-2 mt-3 flex text-sm font-medium items-center justify-evenly"
+        >
           <span
             class="mr-4 block font-bold text-center text-lg mb-1 text-blue-900"
           >
@@ -126,8 +131,8 @@ export default {
     procoteAppliedValue() {
       let result = this.result.details.ml_procote_per_acre;
       if (this.preferences.procoteAsAppliedPerArea == "Ounces")
-        result = (result / 29.574).toFixed();
-      return result;
+        result = result / 29.574;
+      return parseFloat(result).toFixed();
     },
     applyPreferences(quantity) {
       let changedQuantity = quantity;

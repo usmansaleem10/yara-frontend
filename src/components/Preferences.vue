@@ -1,8 +1,15 @@
 <template>
   <div class="flex items-center justify-evenly">
-    <h1 class="block font-bold text-center text-xl mb-1 text-blue-900">User Preferences</h1>
+    <h1 class="block font-bold text-center text-xl mb-1 text-blue-900">
+      User Preferences
+    </h1>
     <div>
-      <img width="90" class="mx-auto" src="https://brandeps.com/logo-download/Y/Yara-logo-vector-01.svg" alt="logo">
+      <img
+        width="90"
+        class="mx-auto"
+        src="https://brandeps.com/logo-download/Y/Yara-logo-vector-01.svg"
+        alt="logo"
+      />
       <div class="block font-bold text-center text-xl mb-1 text-blue-900">
         ApplyIt
       </div>
@@ -100,7 +107,7 @@ export default {
         weightAppliedPerArea: ["Pounds", "Kilograms"],
         weightAsBlended: ["Ton", "Tonne"],
         weightAppliedToBlended: ["Quarts", "Liters"],
-        procoteAsAppliedPerArea: ["Milliliters", "Ounces"],
+        procoteAsAppliedPerArea: ["Ounces", "Milliliters"],
       }[name];
     },
     details(name) {

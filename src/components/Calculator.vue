@@ -11,10 +11,7 @@
       <Preferences v-else :pref="preferences" :setValue="setValue" />
     </div>
     <div class="footer">
-      <nav
-        class="flex"
-        aria-label="Tabs"
-      >
+      <nav class="flex" aria-label="Tabs">
         <span
           v-for="(tab, tabIdx) in tabs"
           :key="tab.name"
@@ -27,23 +24,46 @@
           :aria-current="tab.current ? 'page' : undefined"
           @click="() => tabAction(tab.name)"
         >
-        <span>
-           <span v-if="tab.name ==='Agronomy'">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mx-auto my-1" viewBox="0 0 20 20" fill="currentColor">
-             <path d="M5 4a1 1 0 00-2 0v7.268a2 2 0 000 3.464V16a1 1 0 102 0v-1.268a2 2 0 000-3.464V4zM11 4a1 1 0 10-2 0v1.268a2 2 0 000 3.464V16a1 1 0 102 0V8.732a2 2 0 000-3.464V4zM16 3a1 1 0 011 1v7.268a2 2 0 010 3.464V16a1 1 0 11-2 0v-1.268a2 2 0 010-3.464V4a1 1 0 011-1z" />
-            </svg>
+          <span>
+            <span v-if="tab.name === 'Agronomy'">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5 mx-auto my-1"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  d="M5 4a1 1 0 00-2 0v7.268a2 2 0 000 3.464V16a1 1 0 102 0v-1.268a2 2 0 000-3.464V4zM11 4a1 1 0 10-2 0v1.268a2 2 0 000 3.464V16a1 1 0 102 0V8.732a2 2 0 000-3.464V4zM16 3a1 1 0 011 1v7.268a2 2 0 010 3.464V16a1 1 0 11-2 0v-1.268a2 2 0 010-3.464V4a1 1 0 011-1z"
+                />
+              </svg>
+            </span>
+            <span v-if="tab.name === 'Calculate'">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5 mx-auto my-1"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  d="M15 8a3 3 0 10-2.977-2.63l-4.94 2.47a3 3 0 100 4.319l4.94 2.47a3 3 0 10.895-1.789l-4.94-2.47a3.027 3.027 0 000-.74l4.94-2.47C13.456 7.68 14.19 8 15 8z"
+                />
+              </svg>
+            </span>
+            <span v-if="tab.name === 'Settings'">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5 mx-auto my-1"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+            </span>
           </span>
-          <span v-if="tab.name ==='Calculate'">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mx-auto my-1" viewBox="0 0 20 20" fill="currentColor">
-              <path d="M15 8a3 3 0 10-2.977-2.63l-4.94 2.47a3 3 0 100 4.319l4.94 2.47a3 3 0 10.895-1.789l-4.94-2.47a3.027 3.027 0 000-.74l4.94-2.47C13.456 7.68 14.19 8 15 8z" />
-            </svg>
-          </span>
-           <span v-if="tab.name ==='Setting'">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mx-auto my-1" viewBox="0 0 20 20" fill="currentColor">
-              <path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd" />
-            </svg>
-           </span>
-        </span>
           <span>{{ tab.name }}</span>
         </span>
       </nav>
@@ -54,7 +74,7 @@
 const tabs = [
   { name: "Agronomy", current: false },
   { name: "Calculate", current: true },
-  { name: "Setting", current: false },
+  { name: "Settings", current: false },
 ];
 import { CalculatorPage, Preferences } from "@/components/index.js";
 export default {

@@ -34,9 +34,6 @@ export default {
       return {
         chart: {
           type: "bar",
-          toolbar: {
-            show: false,
-          },
         },
         plotOptions: {
           bar: {
@@ -67,6 +64,22 @@ export default {
             style: {
               fontSize: "12px",
             },
+          },
+        },
+        tooltip: {
+          custom: function ({ series, seriesIndex, dataPointIndex, w }) {
+            console.log(w);
+            return (
+              '<div class="bg-white overflow-hidden shadow rounded-lg divide-y divide-gray-200">' +
+              '<div class="px-4 py-1 sm:px-1 bg-gray-50">' +
+              w.config.xaxis.categories[seriesIndex] +
+              " </div>" +
+              ' <div class="px-1 py-1 sm:p-1">' +
+              series[seriesIndex][dataPointIndex] +
+              "%" +
+              "</div>" +
+              "</div>"
+            );
           },
         },
       };

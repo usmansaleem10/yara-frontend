@@ -9,7 +9,7 @@
       <SwitchGroup as="div" class="flex items-center justify-center">
         <SwitchLabel as="span" class="mr-3">
           <span class="text-xl font-medium text-gray-500"
-            >{{ options[1] }}
+            >{{ options[0] }}
           </span>
         </SwitchLabel>
         <Switch
@@ -26,7 +26,7 @@
         </Switch>
         <SwitchLabel as="span" class="ml-3">
           <span class="text-xl font-medium text-gray-500"
-            >{{ options[0] }}
+            >{{ options[1] }}
           </span>
         </SwitchLabel>
       </SwitchGroup>
