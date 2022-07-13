@@ -29,7 +29,9 @@
             {{ preferences.procoteAsAppliedPerArea }} per acre:
             {{ procoteAppliedValue() }}
           </div>
-          <label class="block font-bold text-center text-lg mb-1 text-blue-900"
+          <label
+            v-if="result?.price"
+            class="block font-bold text-center text-lg mb-1 text-blue-900"
             >Price: ${{ applyPricePreference() }}/Ac</label
           >
         </div>
@@ -103,7 +105,7 @@ export default {
   data() {
     return {
       loading: false,
-      unitKg: true,
+      unitKg: false,
       result: {
         details: {},
         price: 0,
@@ -154,7 +156,7 @@ export default {
         quantity = parseFloat(quantity);
       }
       quantity = this.applyPreferences(quantity);
-      return quantity ? quantity.toFixed(2) : 0;
+      return quantity ? quantity.toFixed(1) : 0;
     },
     showChart() {
       return Object.values(this.result.removal).some((val) => val != null);

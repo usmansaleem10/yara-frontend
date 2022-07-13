@@ -1,5 +1,8 @@
 <template>
   <div class="chart-holder">
+    <label class="block font-bold text-center text-lg mb-1 text-blue-900"
+      >Percentage of Crop Removal</label
+    >
     <apexchart
       type="bar"
       height="200"
@@ -68,11 +71,10 @@ export default {
         },
         tooltip: {
           custom: function ({ series, seriesIndex, dataPointIndex, w }) {
-            console.log(w);
             return (
               '<div class="bg-white overflow-hidden shadow rounded-lg divide-y divide-gray-200">' +
               '<div class="px-4 py-1 sm:px-1 bg-gray-50">' +
-              w.config.xaxis.categories[seriesIndex] +
+              w.config.xaxis.categories[dataPointIndex] +
               " </div>" +
               ' <div class="px-1 py-1 sm:p-1">' +
               series[seriesIndex][dataPointIndex] +
