@@ -44,7 +44,10 @@
       </li>
       <li class="py-4">
         <Toggle
-          :disabled="pref.weightAppliedToBlended == 'Quarts'"
+          :disabled="
+            pref.weightAppliedToBlended == 'Quarts' ||
+            pref.weightAppliedPerArea == 'Pounds'
+          "
           :details="details('weightAsBlended')"
           name="weightAsBlended"
           :value="pref.weightAsBlended"

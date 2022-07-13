@@ -117,7 +117,10 @@ export default {
     },
     setValue(name, val) {
       this.preferences[name] = val;
-      if (name == "weightAppliedToBlended" && val == "Quarts") {
+      if (
+        (name == "weightAppliedToBlended" && val == "Quarts") ||
+        (name == "weightAppliedPerArea" && val == "Pounds")
+      ) {
         this.preferences.weightAsBlended = "Ton";
       }
     },
