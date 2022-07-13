@@ -93,7 +93,7 @@ export default {
         region: "New Brunswick",
         area: "Hectares",
         weight: "Grams",
-        weightAppliedPerArea: "Kg",
+        weightAppliedPerArea: "Kilograms",
         weightAsBlended: "Tonne",
         weightAppliedToBlended: "Liters",
         procoteAsAppliedPerArea: "Milliliters",
@@ -117,6 +117,9 @@ export default {
     },
     setValue(name, val) {
       this.preferences[name] = val;
+      if (name == "weightAppliedToBlended" && val == "Quarts") {
+        this.preferences.weightAsBlended = "Ton";
+      }
     },
     selectTab(name) {
       this.selectedTab = name;

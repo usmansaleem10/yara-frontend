@@ -35,12 +35,8 @@
             >Price: ${{ applyPricePreference() }}/Ac</label
           >
         </div>
-        <div
-          class="px-2 mt-3 flex text-sm font-medium items-center justify-evenly"
-        >
-          <span
-            class="mr-4 block font-bold text-center text-lg mb-1 text-blue-900"
-          >
+        <div class="flex text-sm font-medium items-center">
+          <span class="block font-bold text-center text-lg mb-1 text-blue-900">
             Quantity:
             {{ resultQuantity() }}</span
           >
@@ -141,10 +137,27 @@ export default {
 
       if (this.preferences.weightAsBlended == "Ton")
         changedQuantity = changedQuantity * 0.907185;
-      if (this.preferences.weightAppliedToBlended == "Quarts")
-        changedQuantity = changedQuantity / 1.05669;
-      if (this.preferences.weightAppliedPerArea == "Pounds")
-        changedQuantity = changedQuantity / 2.20462;
+      if (
+        this.preferences.weightAppliedToBlended == "Quarts" &&
+        this.preferences.weightAsBlended == "Ton" &&
+        !this.unitKg
+      ) {
+        changedQuantity =
+          ((2000 / parseFloat(this.calculatorValues.dfRate)) *
+            this.result?.details?.ml_procote_per_acre) /
+          946.353;
+      }
+      if (
+        this.preferences.weightAppliedPerArea == "Pounds" &&
+        this.preferences.weightAsBlended == "Ton" &&
+        this.unitKg
+      )
+        changedQuantity =
+          (((2000 / parseFloat(this.calculatorValues.dfRate)) *
+            this.result?.details?.ml_procote_per_acre) /
+            1000) *
+          this.result?.details?.procote?.density *
+          2.205;
       return changedQuantity;
     },
     resultQuantity() {

@@ -14,6 +14,7 @@
         </SwitchLabel>
         <Switch
           v-model="enabled"
+          :disabled="disabled"
           class="bg-blue-500 relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500"
         >
           <span
@@ -44,15 +45,16 @@ export default {
     setValue: { type: Function, required: true },
     options: { type: Array, required: true },
     details: { type: Object, required: true },
+    disabled: { type: Boolean, default: false },
   },
   components: { Switch, SwitchGroup, SwitchLabel },
   computed: {
     enabled: {
       get: function () {
-        return this.value == this.options[0];
+        return this.value == this.options[1];
       },
       set: function (newValue) {
-        const returnValue = newValue ? this.options[0] : this.options[1];
+        const returnValue = newValue ? this.options[1] : this.options[0];
         this.setValue(this.name, returnValue);
       },
     },
