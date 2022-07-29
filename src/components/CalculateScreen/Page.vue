@@ -212,6 +212,7 @@ export default {
           this.result.price = price;
           this.result.quantity = quantity_per_tonne;
           this.result.removal = removal;
+          this.calculateMlPerAcre(price);
         })
         .finally(() => {
           this.loading = false;
