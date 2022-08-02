@@ -128,36 +128,22 @@ export default {
     },
     procoteAppliedValue() {
       let result = this.result.details.ml_procote_per_acre;
-      if (this.preferences.procoteAsAppliedPerArea == "Ounces")
-        result = result / 29.574;
-      return parseFloat(result).toFixed();
+      return parseFloat(result).toFixed(1);
     },
     applyPreferences(quantity) {
       let changedQuantity = quantity;
-
-      if (this.preferences.weightAsBlended == "Ton")
-        changedQuantity = changedQuantity * 0.907185;
-      if (
-        this.preferences.weightAppliedToBlended == "Quarts" &&
-        this.preferences.weightAsBlended == "Ton" &&
-        !this.unitKg
-      ) {
-        changedQuantity =
-          ((2000 / parseFloat(this.calculatorValues.dfRate)) *
-            this.result?.details?.ml_procote_per_acre) /
-          946.353;
-      }
       if (
         this.preferences.weightAppliedPerArea == "Pounds" &&
         this.preferences.weightAsBlended == "Ton" &&
         this.unitKg
       )
-        changedQuantity =
-          (((2000 / parseFloat(this.calculatorValues.dfRate)) *
-            this.result?.details?.ml_procote_per_acre) /
-            1000) *
-          this.result?.details?.procote?.density *
-          2.205;
+        changedQuantity = (this.result.quantity.kg / 2204.6) * 2000 * 2.205;
+      if (
+        this.preferences.weightAppliedToBlended == "Quarts" &&
+        this.preferences.weightAsBlended == "Ton" &&
+        !this.unitKg
+      )
+        changedQuantity = ((this.result.quantity.liter * 1.06) / 2205) * 2000;
       return changedQuantity;
     },
     resultQuantity() {
@@ -223,20 +209,37 @@ export default {
       this.loading = value;
     },
     calculateMlPerAcre(value) {
-      const procote_amount =
-        this.result.details.procote[this.result.details.region.currency] / 1000;
-      this.result.details.ml_procote_per_acre = (
-        value / procote_amount
-      ).toFixed(2);
+      let procote_amount = 0;
+      if (this.result.details.region.currency == "us_price") {
+        procote_amount =
+          (value /
+            this.result.details.procote[this.result.details.region.currency]) *
+          128;
+        this.result.details.ml_procote_per_acre = procote_amount;
+      } else {
+        procote_amount =
+          this.result.details.procote[this.result.details.region.currency] /
+          1000;
+        this.result.details.ml_procote_per_acre = (
+          value / procote_amount
+        ).toFixed(2);
+      }
     },
     calculateQuantity() {
-      const LBS_PER_METRIC_TON = 2204.62;
+      const isUsRegion = this.result.details.region.currency == "us_price";
+      const LBS_PER_METRIC_TON = isUsRegion ? 2000 : 2204.62;
       const dfRate = parseFloat(this.calculatorValues.dfRate);
       const mlPerAcre = parseFloat(this.result.details.ml_procote_per_acre);
-      const literValue = (
-        ((LBS_PER_METRIC_TON / dfRate) * mlPerAcre) /
-        1000
-      ).toFixed(2);
+
+      let literValue = 0;
+      if (isUsRegion) {
+        literValue = ((LBS_PER_METRIC_TON / dfRate) * mlPerAcre) / 32;
+      } else {
+        literValue = (
+          ((LBS_PER_METRIC_TON / dfRate) * mlPerAcre) /
+          1000
+        ).toFixed(2);
+      }
       this.result.quantity.liter = literValue;
       this.result.quantity.kg =
         this.result.details.procote.density * literValue;
