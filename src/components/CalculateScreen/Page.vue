@@ -246,9 +246,13 @@ export default {
     },
     calculateRemovalRatio() {
       const { ml_procote_per_acre, procote, removal } = this.result.details;
+      let mlValue = ml_procote_per_acre;
+      if (this.result.details.region.currency == "us_price") {
+        mlValue = 29.57 * ml_procote_per_acre;
+      }
       Object.keys(this.result.removal).forEach((ratio) => {
         const removalValue =
-          (parseFloat(ml_procote_per_acre) * procote[ratio]) /
+          (parseFloat(mlValue) * procote[ratio]) /
           (this.calculatorValues.yieldValue * removal[ratio]);
         this.result.removal[ratio] = removalValue.toFixed(2) * 100;
       });
