@@ -1,6 +1,5 @@
 import axios from "axios";
-import { BASE_URL } from "@/config/constants.js";
-axios.defaults.baseURL = BASE_URL;
+axios.defaults.baseURL = process.env.VUE_APP_API_URL;
 axios.defaults.headers["Content-Type"] = "application/json";
 
 export const patch = (url, body) => {
