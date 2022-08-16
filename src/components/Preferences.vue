@@ -101,10 +101,32 @@ export default {
     region: {
       handler(val) {
         this.setValue("region", val);
+        this.setRegionPreference(val);
       },
     },
   },
   methods: {
+    setRegionPreference(val) {
+      const currency = this.regions.find(
+        (region) => region.state_name == val
+      ).currency;
+      if (currency == "us_price") this.setUsPreference();
+      else this.setCanadianPreference();
+    },
+    setUsPreference() {
+      this.setValue("weight", "Pounds");
+      this.setValue("weightAppliedPerArea", "Pounds");
+      this.setValue("weightAsBlended", "Ton");
+      this.setValue("weightAppliedToBlended", "Quarts");
+      this.setValue("procoteAsAppliedPerArea", "Ounces");
+    },
+    setCanadianPreference() {
+      this.setValue("procoteAsAppliedPerArea", "Milliliters");
+      this.setValue("weightAsBlended", "Tonne");
+      this.setValue("weightAppliedToBlended", "Liters");
+      this.setValue("weightAppliedPerArea", "Kilograms");
+      this.setValue("weight", "Grams");
+    },
     options(name) {
       return {
         weight: ["Pounds", "Grams"],
