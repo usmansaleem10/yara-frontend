@@ -38,7 +38,6 @@
           :details="details('procoteAsAppliedPerArea')"
           name="procoteAsAppliedPerArea"
           :value="pref.procoteAsAppliedPerArea"
-          :setValue="setValue"
           :options="options('procoteAsAppliedPerArea')"
         />
       </li>
@@ -51,7 +50,6 @@
           :details="details('weightAsBlended')"
           name="weightAsBlended"
           :value="pref.weightAsBlended"
-          :setValue="setValue"
           :options="options('weightAsBlended')"
         />
       </li>
@@ -60,7 +58,6 @@
           :details="details('weightAppliedToBlended')"
           name="weightAppliedToBlended"
           :value="pref.weightAppliedToBlended"
-          :setValue="setValue"
           :options="options('weightAppliedToBlended')"
         />
       </li>
@@ -69,7 +66,6 @@
           :details="details('weightAppliedPerArea')"
           name="weightAppliedPerArea"
           :value="pref.weightAppliedPerArea"
-          :setValue="setValue"
           :options="options('weightAppliedPerArea')"
         />
       </li>

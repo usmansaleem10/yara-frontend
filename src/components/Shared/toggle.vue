@@ -42,7 +42,6 @@ export default {
   props: {
     name: { type: String, required: true },
     value: { type: String },
-    setValue: { type: Function, required: true },
     options: { type: Array, required: true },
     details: { type: Object, required: true },
     disabled: { type: Boolean, default: false },
@@ -52,10 +51,6 @@ export default {
     enabled: {
       get: function () {
         return this.value == this.options[1];
-      },
-      set: function (newValue) {
-        const returnValue = newValue ? this.options[1] : this.options[0];
-        this.setValue(this.name, returnValue);
       },
     },
   },
