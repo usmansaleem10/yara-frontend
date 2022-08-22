@@ -37,6 +37,12 @@ export default {
       return {
         chart: {
           type: "bar",
+          toolbar: {
+            show: true,
+            tools: {
+              download: false, // <== line to add
+            },
+          },
         },
         plotOptions: {
           bar: {
